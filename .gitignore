@@ -1,0 +1,69 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore cache files.
+/**/cache/*
+/**/pid
+**/*.pid
+**/*.pid.lock
+
+# Ignore uploaded files in public/system.
+/public/system/*
+/storage/*
+!/public/system/.keep
+
+# Ignore the secret key base.
+/config/credentials.yml.enc
+/config/master.key
+/config/puma/*.key
+
+# Ignore environment-specific settings.
+/.env
+/.env.development.local
+/.env.test.local
+/.env.production.local
+
+# Ignore node_modules
+/node_modules
+/yarn-error.log
+
+# Ignore compiled assets.
+/public/assets
+/public/packs
+/public/packs-test
+/public/packs/*
+
+# Ignore the byebug command history file.
+/.byebug_history
+
+# Ignore coverage directory.
+/coverage/
+
+# Ignore Spring files.
+/spring
+/spring/*.pid
+
+# Ignore macOS specific files.
+.DS_Store
+
+# Ignore editor specific files.
+*.swp
+*.swo
+*~
+.project
+.idea
+.secret
+.vscode/
+
+# Ignore system files
+Thumbs.db
