@@ -1,0 +1,2 @@
+module UserCollectionRelationshipsHelper
+end

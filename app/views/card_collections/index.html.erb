@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Card collections" %>
+
+<h1>Card collections</h1>
+
+<div id="card_collections">
+  <% @card_collections.each do |card_collection| %>
+    <%= render card_collection %>
+    <p>
+      <%= link_to "Show this card collection", card_collection %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New card collection", new_card_collection_path %>

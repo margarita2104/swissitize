@@ -1,0 +1,12 @@
+<% content_for :title, "Editing user collection relationship" %>
+
+<h1>Editing user collection relationship</h1>
+
+<%= render "form", user_collection_relationship: @user_collection_relationship %>
+
+<br>
+
+<div>
+  <%= link_to "Show this user collection relationship", @user_collection_relationship %> |
+  <%= link_to "Back to user collection relationships", user_collection_relationships_path %>
+</div>

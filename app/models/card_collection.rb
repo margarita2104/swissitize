@@ -1,0 +1,2 @@
+class CardCollection < ApplicationRecord
+end

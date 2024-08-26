@@ -1,0 +1,11 @@
+<% content_for :title, "New card collection" %>
+
+<h1>New card collection</h1>
+
+<%= render "form", card_collection: @card_collection %>
+
+<br>
+
+<div>
+  <%= link_to "Back to card collections", card_collections_path %>
+</div>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user_collection_relationship %>
+
+<div>
+  <%= link_to "Edit this user collection relationship", edit_user_collection_relationship_path(@user_collection_relationship) %> |
+  <%= link_to "Back to user collection relationships", user_collection_relationships_path %>
+
+  <%= button_to "Destroy this user collection relationship", @user_collection_relationship, method: :delete %>
+</div>
