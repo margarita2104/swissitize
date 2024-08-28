@@ -12,6 +12,11 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'swiss-red': '#DA291C',
+        'clear-sky': '#EAFFFC',
+        'gold':'#FFD700',
+      },
     },
   },
   plugins: [
