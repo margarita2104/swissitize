@@ -67,3 +67,6 @@
 
 # Ignore system files
 Thumbs.db
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
