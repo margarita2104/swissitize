@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="flex items-center border-b border-gray-300 w-fit min-w-96">
+    <%= form.label :name, "Title", style: "display: block" %>
+    <%= form.text_field :name, placeholder: "Enter the title of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0" %>
   </div>
 
-  <div>
+  <div class="flex items-center border-b border-gray-300 w-fit min-w-96">
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, placeholder: "Enter a description of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0"  %>
   </div>
 
   <div>
