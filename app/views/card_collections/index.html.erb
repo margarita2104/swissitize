@@ -1,17 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Card collections" %>
+<% content_for :title, "Practice decks" %>
 
-<h1 class="text-4xl">Card collections</h1> 
+<h1 class="text-4xl">Practice decks</h1> 
 
-<div id="card_collections">
-
+<div id="card_collections" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
   <% @card_collections.each do |card_collection| %>
-    <%= render card_collection %>
-    <p>
-      <%= link_to "Show this card collection", card_collection %>
-    </p>
+    <div class="bg-white rounded-lg shadow-md p-4">
+      <%= render card_collection %>
+      <p class="mt-2 text-blue-500">
+        <%= link_to "Show this practice deck", card_collection %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New card collection", new_card_collection_path %>
+<%= link_to "New practice deck", new_card_collection_path %>
