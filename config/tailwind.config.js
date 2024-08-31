@@ -16,6 +16,7 @@ module.exports = {
         'swiss-red': '#DA291C',
         'clear-sky': '#EAFFFC',
         'gold':'#FFD700',
+        'mercury':'#E5E3E3',
       },
     },
   },

@@ -60,9 +60,53 @@
        <a href="#" class="py-3 px-6 bg-white hover:bg-gold text-black rounded-full" >Log in</a>
       </div> %>
     </header>
-    <main class="container mx-auto mt-12 px-5 flex flex-col">
+    <div class="flex">
+     <div class="p-6 w-1/4 border-r border-mercury">
+      <button class="mb-6" >
+        <%= image_tag ("icons/eye-open.svg") %>
+      </button>
+      <nav class="text-xl" >
+        <ul>
+          <li class="mb-3"> 
+            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
+              <%= image_tag ("icons/home.svg"), class: "mr-8" %>
+              <span> Home </span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
+              <%= image_tag ("icons/profile.svg"), class: "mr-8" %>
+              <span>Your profile</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
+              <%= image_tag ("icons/your-library.svg"), class: "mr-8" %>
+              <span>Your library</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
+              <%= image_tag ("icons/base-decks.svg"), class: "mr-8" %>
+              <span>Base decks</span>
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
+              <%= image_tag ("icons/explore.svg"), class: "mr-8" %>
+              <span>Explore</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
 
+      </nav>
+    </div>
+    <main class="container mx-auto px-10 mt-10 flex flex-col">
       <%= yield %>
-    </main>
+    </main>     
+    </div>
+
   </body>
 </html>
