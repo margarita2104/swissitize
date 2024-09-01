@@ -8,5 +8,9 @@
 }
 
 h1, h2, h3 {
-  font-family: 'AkzidenzGrotesk';
+  font-family: 'AkzidenzGrotesk', sans-serif;
+}
+
+.hide-text .nav-text {
+  display: none;
 }
