@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <header class="bg-swiss-red p-7 flex items-center justify-between text-white font-semibold text-xl">
+    <header class="bg-swiss-red px-7 py-3 flex items-center justify-between text-white font-semibold text-lg">
       <a href="/">
         <%= image_tag ("logo.svg") %>
       </a>
@@ -48,12 +48,12 @@
         </ul>
       </nav>
       <div class="flex gap-7">
-        <%= link_to new_card_collection_path, class: "flex items-center justify-center h-14 w-14 bg-white hover:bg-gold text-black rounded-full" do %>
+        <%= link_to new_card_collection_path, class: "flex items-center justify-center h-12 w-12 bg-white hover:bg-gold text-black rounded-full" do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
           </svg>
         <% end %>
-       <a href="#" class="py-3 px-6 bg-white hover:bg-gold text-black rounded-full self-center" >Log out</a>
+       <a href="#" class="py-2 px-4 bg-white hover:bg-gold text-black rounded-full self-center" >Log out</a>
       </div>
       <%# <div class="flex gap-7">
        <a href="#" class="py-3 px-6 bg-white hover:bg-gold text-black rounded-full" >Sign up</a>
@@ -61,46 +61,43 @@
       </div> %>
     </header>
     <div class="flex">
-     <div class="p-6 w-1/4 border-r border-mercury">
-      <button class="mb-6" >
-        <%= image_tag ("icons/eye-open.svg") %>
+     <div class="p-6 w-1/5 border-r border-mercury" id="side-bar">
+      <button class="mb-6" id="toggle-visibility">
+        <%= image_tag("icons/eye-open.svg", id: "eye-icon") %>
       </button>
-      <nav class="text-xl" >
-        <ul>
-          <li class="mb-3"> 
-            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
-              <%= image_tag ("icons/home.svg"), class: "mr-8" %>
-              <span> Home </span>
-            </a>
+      <nav class="text-lg" id="side-menu" >
+        <ul class="flex flex-col" id="side-list">
+          <li class="mb-2">
+            <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl" do %>
+              <%= image_tag("icons/home.svg") %>
+              <span class="nav-text ml-5">Home</span>
+            <% end %>
           </li>
-          <li class="mb-3">
-            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
-              <%= image_tag ("icons/profile.svg"), class: "mr-8" %>
-              <span>Your profile</span>
-            </a>
+          <li class="mb-2">
+            <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl" do %>
+              <%= image_tag("icons/profile.svg") %>
+              <span class="nav-text ml-5">Your profile</span>
+            <% end %>
           </li>
-          <li class="mb-3">
-            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
-              <%= image_tag ("icons/your-library.svg"), class: "mr-8" %>
-              <span>Your library</span>
-            </a>
+          <li class="mb-2">
+            <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl" do %>
+              <%= image_tag("icons/your-library.svg") %>
+              <span class="nav-text ml-5">Your library</span>
+            <% end %>
           </li>
-          <li class="mb-3">
-            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
-              <%= image_tag ("icons/base-decks.svg"), class: "mr-8" %>
-              <span>Base decks</span>
-            </a>
+          <li class="mb-2">
+            <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl" do %>
+              <%= image_tag("icons/base-decks.svg") %>
+              <span class="nav-text ml-5">Base decks</span>
+            <% end %>
           </li>
-          <li class="mb-3">
-            <a href="#" class="flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl">
-              <%= image_tag ("icons/explore.svg"), class: "mr-8" %>
-              <span>Explore</span>
-            </a>
+          <li class="mb-2">
+            <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-2 py-4 rounded-3xl" do %>
+              <%= image_tag("icons/explore.svg") %>
+              <span class="nav-text ml-5">Explore</span>
+            <% end %>
           </li>
         </ul>
-      </nav>
-      <nav>
-
       </nav>
     </div>
     <main class="container mx-auto px-10 mt-10 flex flex-col">
