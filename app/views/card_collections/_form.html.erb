@@ -2,7 +2,6 @@
   <% if card_collection.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(card_collection.errors.count, "error") %> prohibited this card_collection from being saved:</h2>
-
       <ul>
         <% card_collection.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,18 +9,29 @@
       </ul>
     </div>
   <% end %>
-
   <div class="flex items-center border-b border-gray-300 w-fit min-w-96">
     <%= form.label :name, "Title", style: "display: block" %>
     <%= form.text_field :name, placeholder: "Enter the title of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0" %>
   </div>
-
   <div class="flex items-center border-b border-gray-300 w-fit min-w-96">
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description, placeholder: "Enter a description of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0"  %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+<h2>Add practice cards</h2>
+<%= form_with(model: @card_collection) do |form| %>
+  <%= fields_for :cards do |card_form| %>
+    <p>
+      <%= card_form.text_field :question %>
+    </p>
+    <p>
+      <%= card_form.text_field :answer %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+<% end%>

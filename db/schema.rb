@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_26_175006) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_02_184013) do
   create_table "card_collections", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "question"
+    t.string "answer"
+    t.integer "card_collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_collection_id"], name: "index_cards_on_card_collection_id"
   end
 
   create_table "user_collection_relationships", force: :cascade do |t|
@@ -35,6 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_175006) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cards", "card_collections"
   add_foreign_key "user_collection_relationships", "card_collections"
   add_foreign_key "user_collection_relationships", "users"
 end
