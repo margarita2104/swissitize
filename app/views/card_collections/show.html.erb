@@ -6,9 +6,13 @@
   <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
 </div>
 <h2>Cards</h2>
-<% @card_collection.cards.each do |card| %>
-  <p>Question</p>
-  <%= card.question %>
-  <p>Answer</p>
-  <%= card.answer %>
-<%end%>
+<% if @card_collection.cards.any? %>
+  <% @card_collection.cards.each do |card| %>
+    <div>
+      <p><strong>Question:</strong> <%= card.question %></p>
+      <p><strong>Answer:</strong> <%= card.answer %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No cards available for this collection.</p>
+<% end %>

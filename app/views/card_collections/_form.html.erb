@@ -17,21 +17,18 @@
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description, placeholder: "Enter a description of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0"  %>
   </div>
+  <h2>Add practice cards</h2>
+  <%= form.fields_for :cards do |card_form| %>
+    <div>
+      <%= card_form.label :question, "Question", style: "display: block" %>
+      <%= card_form.text_field :question, placeholder: "Enter the question", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0" %>
+    </div>
+    <div>
+      <%= card_form.label :answer, "Answer", style: "display: block" %>
+      <%= card_form.text_field :answer, placeholder: "Enter the answer", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0" %>
+    </div>
+  <% end %>
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Collection" %>
   </div>
 <% end %>
-<h2>Add practice cards</h2>
-<%= form_with(model: @card_collection) do |form| %>
-  <%= fields_for :cards do |card_form| %>
-    <p>
-      <%= card_form.text_field :question %>
-    </p>
-    <p>
-      <%= card_form.text_field :answer %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-  <% end %>
-<% end%>
