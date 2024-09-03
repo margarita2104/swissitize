@@ -13,10 +13,12 @@ class CardCollectionsController < ApplicationController
   # GET /card_collections/new
   def new
     @card_collection = CardCollection.new
+    10.times { @card_collection.cards.build }
   end
 
   # GET /card_collections/1/edit
   def edit
+    10.times { @card_collection.cards.build }
   end
 
   # POST /card_collections or /card_collections.json
@@ -70,6 +72,6 @@ class CardCollectionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def card_collection_params
-    params.require(:card_collection).permit(:name, :description)
+    params.require(:card_collection).permit(:name, :description, cards_attributes: %i[id question answer _destroy])
   end
 end

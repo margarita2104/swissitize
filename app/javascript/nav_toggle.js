@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbo:load", function () {
   const sideMenu = document.getElementById("side-menu");
   const sideBar = document.getElementById("side-bar");
   const eyeIcon = document.getElementById("eye-icon");

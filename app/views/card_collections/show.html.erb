@@ -1,10 +1,18 @@
 <p style="color: green"><%= notice %></p>
-
 <%= render @card_collection %>
-
 <div>
   <%= link_to "Edit this practice deck", edit_card_collection_path(@card_collection) %> |
   <%= link_to "Back to practice decks", card_collections_path %>
-
   <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
 </div>
+<h2>Cards</h2>
+<% if @card_collection.cards.any? %>
+  <% @card_collection.cards.each do |card| %>
+    <div>
+      <p><strong>Question:</strong> <%= card.question %></p>
+      <p><strong>Answer:</strong> <%= card.answer %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No cards available for this collection.</p>
+<% end %>

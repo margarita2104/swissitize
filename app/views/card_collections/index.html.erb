@@ -1,9 +1,6 @@
 <p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Practice decks" %>
-
-<h1 class="text-4xl mb-14">Practice decks</h1> 
-
+<h1 class="text-4xl mb-14">Practice decks</h1>
 <div id="card_collections" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
   <% @card_collections.each do |card_collection| %>
     <div class="border-2 border-mercury rounded-3xl p-5 mb-6">
@@ -14,5 +11,4 @@
     </div>
   <% end %>
 </div>
-
 <%= link_to "New practice deck", new_card_collection_path %>
