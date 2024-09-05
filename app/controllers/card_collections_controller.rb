@@ -13,12 +13,13 @@ class CardCollectionsController < ApplicationController
   # GET /card_collections/new
   def new
     @card_collection = CardCollection.new
-    10.times { @card_collection.cards.build }
+    5.times { @card_collection.cards.build }
   end
 
   # GET /card_collections/1/edit
   def edit
-    10.times { @card_collection.cards.build }
+    # 10.times { @card_collection.cards.build }
+    @card_collection = CardCollection.find(params[:id])
   end
 
   # POST /card_collections or /card_collections.json
