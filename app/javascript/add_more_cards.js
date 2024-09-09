@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbo:load", function() {
   let cardIndex = document.querySelectorAll(".card-field").length;
 
   document.getElementById("add-card-btn").addEventListener("click", function() {

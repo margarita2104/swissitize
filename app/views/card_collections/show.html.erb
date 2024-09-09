@@ -1,18 +1,27 @@
 <p style="color: green"><%= notice %></p>
-<%= render @card_collection %>
+<h1 class="text-4xl mb-5">
+  <%= @card_collection.name %>
+</h1>
+<p class="mb-5 w-2/3">
+  <%= @card_collection.description %>
+</p>
+<% if @card_collection.cards.any? %>
+  <div id="card-data" data-cards="<%= json_escape(@card_collection.cards.map { |card| {question: card.question, answer: card.answer} }.to_json) %>"></div>
+  <div id="practice-card" class="w-2/3 shadow-lg min-h-96 cursor-pointer bg-[#E5E3E321] rounded-3xl mb-4 flex items-center justify-center px-10">
+    <div class="text-center">
+      <p class="text-xl font-semibold mb-5" id="question"><%= @card_collection.cards.first.question %></p>
+      <p class="text-xl hidden" id="answer"><%= @card_collection.cards.first.answer %></p>
+    </div>
+  </div>
+  <div class="w-2/3 flex justify-between">
+    <button id="prev" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Previous</button>
+    <button id="next" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
+  </div>
+<% else %>
+  <p>No cards available for this collection.</p>
+<% end %>
 <div>
   <%= link_to "Edit this practice deck", edit_card_collection_path(@card_collection) %> |
   <%= link_to "Back to practice decks", card_collections_path %>
   <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
 </div>
-<h2>Cards</h2>
-<% if @card_collection.cards.any? %>
-  <% @card_collection.cards.each do |card| %>
-    <div>
-      <p><strong>Question:</strong> <%= card.question %></p>
-      <p><strong>Answer:</strong> <%= card.answer %></p>
-    </div>
-  <% end %>
-<% else %>
-  <p>No cards available for this collection.</p>
-<% end %>
