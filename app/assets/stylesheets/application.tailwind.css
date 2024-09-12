@@ -14,3 +14,9 @@ h1, h2, h3 {
 .hide-text .nav-text {
   display: none;
 }
+
+textarea {
+  height: auto;
+  resize: none;
+  overflow: auto;
+}
