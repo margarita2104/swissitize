@@ -1,35 +1,63 @@
-document.addEventListener("turbo:load", function() {
-  const cardDataElement = document.getElementById('card-data');
-  let cards = JSON.parse(cardDataElement.getAttribute('data-cards'));
-  let currentIndex = 0;
+document.addEventListener("turbo:load", function () {
+  document.getElementById("next").addEventListener("click", function () {
+    let cardId = this.dataset.cardId;
 
-  const questionElement = document.getElementById('question');
-  const answerElement = document.getElementById('answer');
-  const practiceCard = document.getElementById('practice-card');
-  
-  function updateCard(index) {
-    questionElement.textContent = cards[index].question;
-    answerElement.textContent = cards[index].answer;
-    answerElement.classList.add('hidden'); 
-  }
+    fetch(
+      `/card_collections/${this.dataset.collectionId}/next_card?card_id=${cardId}`,
+      {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("question").textContent = data.question;
+        document.getElementById("answer").textContent = data.answer;
+        document.getElementById("answer").classList.add("hidden");
 
-  document.getElementById('next').addEventListener('click', function() {
-    if (currentIndex < cards.length - 1) {
-      currentIndex++;
-      updateCard(currentIndex);
-    }
+        this.dataset.cardId = data.next_card_id;
+
+        document.getElementById("prev").dataset.cardId = data.prev_card_id;
+      })
+      .catch((error) => console.error("Error:", error));
   });
 
-  document.getElementById('prev').addEventListener('click', function() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCard(currentIndex);
-    }
+  document.getElementById("prev").addEventListener("click", function () {
+    let cardId = this.dataset.cardId;
+
+    fetch(
+      `/card_collections/${this.dataset.collectionId}/previous_card?card_id=${cardId}`,
+      {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("question").textContent = data.question;
+        document.getElementById("answer").textContent = data.answer;
+        document.getElementById("answer").classList.add("hidden");
+
+        this.dataset.cardId = data.prev_card_id;
+
+        document.getElementById("next").dataset.cardId = data.next_card_id;
+      })
+      .catch((error) => console.error("Error:", error));
   });
 
-  practiceCard.addEventListener('click', function() {
-    answerElement.classList.toggle('hidden');
-  });
+  document
+    .getElementById("practice-card")
+    .addEventListener("click", function () {
+      const answerElement = document.getElementById("answer");
 
-  updateCard(currentIndex);
+      if (answerElement.classList.contains("hidden")) {
+        answerElement.classList.remove("hidden");
+      } else {
+        answerElement.classList.add("hidden");
+      }
+    });
 });

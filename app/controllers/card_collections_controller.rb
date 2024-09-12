@@ -64,7 +64,49 @@ class CardCollectionsController < ApplicationController
     end
   end
 
+  def show_next_card
+    card_collection = CardCollection.find(params[:id])
+    card = find_card(card_collection, params[:card_id])
+    next_card = next_card(card_collection, card)
+    prev_card = previous_card(card_collection, card)
+
+    render json: {
+      question: next_card.question,
+      answer: next_card.answer,
+      next_card_id: next_card.id,
+      prev_card_id: prev_card.id
+    }
+  end
+
+  def show_previous_card
+    card_collection = CardCollection.find(params[:id])
+    card = find_card(card_collection, params[:card_id])
+    prev_card = previous_card(card_collection, card)
+    next_card = next_card(card_collection, card)
+
+    render json: {
+      question: prev_card.question,
+      answer: prev_card.answer,
+      next_card_id: next_card.id,
+      prev_card_id: prev_card.id
+    }
+  end
+
   private
+
+  def find_card(card_collection, card_id)
+    card_collection.cards.find_by(id: card_id)
+  end
+
+  def next_card(card_collection, card)
+    card_collection.cards.where('id > ?', card.id).first || card_collection.cards.first
+  end
+
+  def previous_card(card_collection, card)
+    card_collection.cards.where('id < ?', card.id).last || card_collection.cards.last
+  end
+
+  # private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_card_collection

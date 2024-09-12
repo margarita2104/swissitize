@@ -16,4 +16,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'card_collections#index'
+
+  resources :card_collections do
+    member do
+      get 'next_card', to: 'card_collections#show_next_card'
+      get 'previous_card', to: 'card_collections#show_previous_card'
+    end
+  end
 end

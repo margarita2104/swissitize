@@ -6,7 +6,6 @@
   <%= @card_collection.description %>
 </p>
 <% if @card_collection.cards.any? %>
-  <div id="card-data" data-cards="<%= json_escape(@card_collection.cards.map { |card| {question: card.question, answer: card.answer} }.to_json) %>"></div>
   <div id="practice-card" class="w-2/3 shadow-lg min-h-96 cursor-pointer bg-[#E5E3E321] rounded-3xl mb-4 flex items-center justify-center px-10">
     <div class="text-center">
       <p class="text-xl font-semibold mb-5" id="question"><%= @card_collection.cards.first.question %></p>
@@ -14,8 +13,14 @@
     </div>
   </div>
   <div class="w-2/3 flex justify-between">
-    <button id="prev" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Previous</button>
-    <button id="next" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
+    <button id="prev" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
+      Previous
+    </button>
+    <button id="next" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+    data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
+      Next
+    </button>
   </div>
 <% else %>
   <p>No cards available for this collection.</p>
