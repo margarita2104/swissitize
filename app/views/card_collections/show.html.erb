@@ -6,21 +6,35 @@
   <%= @card_collection.description %>
 </p>
 <% if @card_collection.cards.any? %>
-  <div id="practice-card" class="w-2/3 shadow-lg min-h-96 cursor-pointer bg-[#E5E3E321] rounded-3xl mb-4 flex items-center justify-center px-10">
+  <div id="practice-card" class="w-2/3 mb-10 shadow-lg min-h-96 cursor-pointer bg-[#E5E3E321] rounded-3xl flex items-center justify-center px-10">
     <div class="text-center">
       <p class="text-xl font-semibold mb-5" id="question"><%= @card_collection.cards.first.question %></p>
       <p class="text-xl hidden" id="answer"><%= @card_collection.cards.first.answer %></p>
     </div>
   </div>
   <div class="w-2/3 flex justify-between">
-    <button id="prev" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    <div>
+      <button>Play</button>
+      <button>Shuffle</button>
+    </div>
+    <div>
+      <button id="prev" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
     data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
-      Previous
-    </button>
-    <button id="next" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+        Previous
+      </button>
+      <span>
+        <span id="card-index">
+          <%= @card_collection.cards.index(@card_collection.cards.first) + 1 %> / <%= @card_collection.cards.size %>
+        </span>
+      </span>
+      <button id="next" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
     data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
-      Next
-    </button>
+        Next
+      </button>
+    </div>
+    <div>
+      <button>Edit</button>
+    </div>
   </div>
 <% else %>
   <p>No cards available for this collection.</p>
