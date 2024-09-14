@@ -74,7 +74,9 @@ class CardCollectionsController < ApplicationController
       question: next_card.question,
       answer: next_card.answer,
       next_card_id: next_card.id,
-      prev_card_id: prev_card.id
+      prev_card_id: prev_card.id,
+      cardIndex: card_collection.cards.index(next_card) + 1,
+      totalCards: card_collection.cards.size
     }
   end
 
@@ -88,7 +90,9 @@ class CardCollectionsController < ApplicationController
       question: prev_card.question,
       answer: prev_card.answer,
       next_card_id: next_card.id,
-      prev_card_id: prev_card.id
+      prev_card_id: prev_card.id,
+      cardIndex: card_collection.cards.index(prev_card) + 1,
+      totalCards: card_collection.cards.size
     }
   end
 
