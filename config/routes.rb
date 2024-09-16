@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     member do
       get 'next_card', to: 'card_collections#show_next_card'
       get 'previous_card', to: 'card_collections#show_previous_card'
+      get 'shuffle_cards', to: 'card_collections#shuffle_cards'
     end
   end
 end

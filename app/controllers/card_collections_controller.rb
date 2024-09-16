@@ -96,6 +96,20 @@ class CardCollectionsController < ApplicationController
     }
   end
 
+  def shuffle_cards
+    @card_collection = CardCollection.find(params[:id])
+    shuffled_cards = @card_collection.cards.shuffle
+
+    render json: {
+      question: shuffled_cards.first.question,
+      answer: shuffled_cards.first.answer,
+      next_card_id: shuffled_cards.second.id,
+      prev_card_id: shuffled_cards.last.id,
+      cardIndex: 1,
+      totalCards: shuffled_cards.size
+    }
+  end
+
   private
 
   def find_card(card_collection, card_id)
