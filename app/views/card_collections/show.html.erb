@@ -12,14 +12,17 @@
       <p class="text-xl hidden" id="answer"><%= @card_collection.cards.first.answer %></p>
     </div>
   </div>
-  <div class="w-2/3 flex justify-between">
-    <div>
-      <button>Play</button>
-      <button>Shuffle</button>
+  <div class="w-2/3 flex justify-between items-center">
+    <div class="flex items-center gap-5">
+      <button id="play" data-collection-id="<%= @card_collection.id %>">
+        <%= image_tag("icons/play-cards.svg") %>
+      </button>
+      <button id="shuffle" data-collection-id="<%= @card_collection.id %>">
+        <%= image_tag("icons/shuffle-cards.svg") %>
+      </button>
     </div>
-    <div class="flex items-center">
-      <button id="prev" class=" text-white font-bold py-2 px-4 rounded"
-    data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
+    <div class="flex items-center gap-5">
+      <button id="prev" data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
         <%= image_tag("icons/previous-card.svg") %>
       </button>
       <span>
@@ -27,20 +30,20 @@
           <%= @card_collection.cards.index(@card_collection.cards.first) + 1 %> / <%= @card_collection.cards.size %>
         </span>
       </span>
-      <button id="next" class=" text-white font-bold py-2 px-4 rounded"
-    data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
+      <button id="next" data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
         <%= image_tag("icons/next-card.svg") %>
       </button>
     </div>
-    <div>
-      <button>Edit</button>
+    <div class="flex items-center">
+      <%= link_to edit_card_collection_path(@card_collection) do %>
+        <%= image_tag("icons/edit.svg") %>
+      <% end %>
     </div>
   </div>
 <% else %>
   <p>No cards available for this collection.</p>
 <% end %>
 <div>
-  <%= link_to "Edit this practice deck", edit_card_collection_path(@card_collection) %> |
   <%= link_to "Back to practice decks", card_collections_path %>
   <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
 </div>
