@@ -58,39 +58,39 @@
       </div> %>
     </header>
     <div class="flex">
-      <div class="p-6 w-1/5 border-r border-mercury" id="side-bar">
+      <div class="p-6 w-[22%] border-r border-mercury" id="side-bar">
         <button class="mb-6 pl-2" id="toggle-visibility">
           <%= image_tag("icons/eye-open.svg", id: "eye-icon") %>
         </button>
-        <nav class="text-lg" id="side-menu" >
+        <nav id="side-menu" >
           <ul class="flex flex-col" id="side-list">
             <li class="mb-2">
               <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/home.svg") %>
+                <%= image_tag("icons/home.svg", style: "width: 40px") %>
                 <span class="nav-text ml-5">Home</span>
               <% end %>
             </li>
             <li class="mb-2">
               <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/profile.svg") %>
+                <%= image_tag("icons/profile.svg", style: "width: 40px") %>
                 <span class="nav-text ml-5">Your profile</span>
               <% end %>
             </li>
             <li class="mb-2">
               <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/your-library.svg") %>
+                <%= image_tag("icons/your-library.svg", style: "width: 40px") %>
                 <span class="nav-text ml-5">Your library</span>
               <% end %>
             </li>
             <li class="mb-2">
               <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/base-decks.svg") %>
+                <%= image_tag("icons/base-decks.svg", style: "width: 40px") %>
                 <span class="nav-text ml-5">Base decks</span>
               <% end %>
             </li>
             <li class="mb-2">
               <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/explore.svg") %>
+                <%= image_tag("icons/explore.svg", style: "width: 40px") %>
                 <span class="nav-text ml-5">Explore</span>
               <% end %>
             </li>

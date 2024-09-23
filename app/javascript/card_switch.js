@@ -17,6 +17,7 @@ document.addEventListener("turbo:load", function () {
 
   function startPlayMode() {
     playButton.innerHTML = '<img src="/assets/icons/stop-play-cards.svg" alt="Stop">';
+    playButton.style.width = "40px"
     playInterval = setInterval(function () {
       showAnswerTimeout = setTimeout(() => {
         answerElement.classList.remove("hidden"); 

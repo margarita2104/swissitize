@@ -10,29 +10,27 @@
     </div>
   <% end %>
   <div class="mb-10">
-    <div class="flex items-center mb-5 border-b border-gray-300 w-fit min-w-96">
+    <div class="flex items-center mb-5 border-b border-gray-300 w-[80%] min-w-96">
       <%= form.label :name, "Title", style: "display: block", class: "font-bold" %>
-      <%= form.text_field :name, placeholder: "Enter the title of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0" %>
+      <%= form.text_area :name, placeholder: "Enter the title of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
     </div>
-    <div class="flex items-center border-b border-gray-300 w-fit min-w-96">
+    <div class="flex items-center border-b border-gray-300 w-[80%] min-w-96 h-fit">
       <%= form.label :description, style: "display: block", class: "font-bold" %>
       <%= form.text_area :description, placeholder: "Enter a description of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
     </div>
   </div>
   <div class="card-fields-container mb-10">
     <%= form.fields_for :cards do |card_form| %>
-      <% if card_form.index < 5 %>
-        <div class="flex mb-5 card-field">
-          <div class="flex items-center border-b border-gray-300 w-fit min-w-96 mr-20">
-            <%= card_form.label :question, "Question", style: "display: block", class: "font-bold" %>
-            <%= card_form.text_area :question, placeholder: "Write a question", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
-          </div>
-          <div class="flex items-center border-b border-gray-300 w-fit min-w-96">
-            <%= card_form.label :answer, "Answer", style: "display: block", class: "font-bold" %>
-            <%= card_form.text_area :answer, placeholder: "Write an answer", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
-          </div>
+      <div class="mb-7 card-field">
+        <div class="flex items-center border-b border-gray-300 w-[85%] min-w-96 mr-20 mb-2">
+          <%= card_form.label :question, "Question", style: "display: block", class: "font-bold" %>
+          <%= card_form.text_area :question, placeholder: "Write a question", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
         </div>
-      <% end %>
+        <div class="flex items-center border-b border-gray-300 w-[85%] min-w-96">
+          <%= card_form.label :answer, "Answer", style: "display: block", class: "font-bold" %>
+          <%= card_form.text_area :answer, placeholder: "Write an answer", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
+        </div>
+      </div>
     <% end %>
   </div>
   <div class="w-[70%] flex justify-center">

@@ -16,7 +16,7 @@ h1, h2, h3 {
 }
 
 textarea {
-  height: auto;
+  height: fit-content;
   resize: none;
   overflow: auto;
 }
