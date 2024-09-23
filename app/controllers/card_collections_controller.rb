@@ -20,6 +20,8 @@ class CardCollectionsController < ApplicationController
   def edit
     # 10.times { @card_collection.cards.build }
     @card_collection = CardCollection.find(params[:id])
+    remaining_fields = 5 - @card_collection.cards.size
+    remaining_fields.times { @card_collection.cards.build } if remaining_fields.positive?
   end
 
   # POST /card_collections or /card_collections.json
