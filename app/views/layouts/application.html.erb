@@ -16,24 +16,24 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <header class="bg-swiss-red px-7 py-3 flex items-center justify-between text-white font-semibold text-lg">
+    <header class=" sticky top-0 bg-swiss-red px-7 py-3 flex items-center justify-between text-white font-semibold text-lg">
       <a href="/">
         <%= image_tag ("logo.svg") %>
       </a>
       <nav>
         <ul class="flex gap-24">
           <li>
-            <a href="#" class="hover:text-gold">
+            <a href="/" class="hover:text-gold">
               Home
             </a>
           </li>
           <li>
-            <a href="#" class="hover:text-gold">
+            <a href="#about" class="hover:text-gold">
               About
             </a>
           </li>
           <li>
-            <a href="#" class="hover:text-gold">
+            <a href="#how-to" class="hover:text-gold">
               How to use
             </a>
           </li>
@@ -58,46 +58,7 @@
       </div> %>
     </header>
     <div class="flex">
-      <div class="p-6 w-[22%] border-r border-mercury" id="side-bar">
-        <button class="mb-6 pl-2" id="toggle-visibility">
-          <%= image_tag("icons/eye-open.svg", id: "eye-icon") %>
-        </button>
-        <nav id="side-menu" >
-          <ul class="flex flex-col" id="side-list">
-            <li class="mb-2">
-              <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/home.svg", style: "width: 40px") %>
-                <span class="nav-text ml-5">Home</span>
-              <% end %>
-            </li>
-            <li class="mb-2">
-              <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/profile.svg", style: "width: 40px") %>
-                <span class="nav-text ml-5">Your profile</span>
-              <% end %>
-            </li>
-            <li class="mb-2">
-              <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/your-library.svg", style: "width: 40px") %>
-                <span class="nav-text ml-5">Your library</span>
-              <% end %>
-            </li>
-            <li class="mb-2">
-              <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/base-decks.svg", style: "width: 40px") %>
-                <span class="nav-text ml-5">Base decks</span>
-              <% end %>
-            </li>
-            <li class="mb-2">
-              <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
-                <%= image_tag("icons/explore.svg", style: "width: 40px") %>
-                <span class="nav-text ml-5">Explore</span>
-              <% end %>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <main class="container mx-auto px-10 mt-10 flex flex-col">
+      <main class="flex-grow">
         <%= yield %>
       </main>
     </div>

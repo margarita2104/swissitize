@@ -17,6 +17,7 @@ module.exports = {
         'clear-sky': '#EAFFFC',
         'gold':'#FFD700',
         'mercury':'#E5E3E3',
+        'malibu':'#72C1F9',
       },
     },
   },

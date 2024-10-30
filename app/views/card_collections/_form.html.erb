@@ -1,47 +1,49 @@
-<%= form_with(model: card_collection) do |form| %>
-  <% if card_collection.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(card_collection.errors.count, "error") %> prohibited this card_collection from being saved:</h2>
-      <ul>
-        <% card_collection.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="mb-10">
-    <div class="flex items-center mb-5 border-b border-gray-300 w-[80%] min-w-96">
-      <%= form.label :name, "Title", style: "display: block", class: "font-bold" %>
-      <%= form.text_area :name, placeholder: "Enter the title of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
-    </div>
-    <div class="flex items-center border-b border-gray-300 w-[80%] min-w-96 h-fit">
-      <%= form.label :description, style: "display: block", class: "font-bold" %>
-      <%= form.text_area :description, placeholder: "Enter a description of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
-    </div>
-  </div>
-  <div class="card-fields-container mb-10">
-    <%= form.fields_for :cards do |card_form| %>
-      <div class="mb-7 card-field">
-        <div class="flex items-center border-b border-gray-300 w-[85%] min-w-96 mr-20 mb-2">
-          <%= card_form.label :question, "Question", style: "display: block", class: "font-bold" %>
-          <%= card_form.text_area :question, placeholder: "Write a question", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
-        </div>
-        <div class="flex items-center border-b border-gray-300 w-[85%] min-w-96">
-          <%= card_form.label :answer, "Answer", style: "display: block", class: "font-bold" %>
-          <%= card_form.text_area :answer, placeholder: "Write an answer", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
-        </div>
+<div class="container mx-auto px-10 mt-10 flex flex-col">
+  <%= form_with(model: card_collection) do |form| %>
+    <% if card_collection.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(card_collection.errors.count, "error") %> prohibited this card_collection from being saved:</h2>
+        <ul>
+          <% card_collection.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
-  </div>
-  <div class="w-[70%] flex justify-center">
-    <button type="button" id="add-card-btn" class="font-bold flex items-center bg-clear-sky px-4 py-4 rounded-3xl">
-      <span class="mr-4">
-        Add more pairs
-      </span>
-      <%= image_tag("icons/add-more-pairs.svg") %>
-    </button>
-  </div>
-  <div>
-    <%= form.submit "Save", class:"py-2 px-4 text-white bg-swiss-red rounded-full cursor-pointer" %>
-  </div>
-<% end %>
+    <div class="mb-10">
+      <div class="flex items-baseline mb-5 border-b border-gray-300 w-[80%] min-w-96">
+        <%= form.label :name, "Title", style: "display: block", class: "font-bold" %>
+        <%= form.text_area :name, placeholder: "Enter the title of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
+      </div>
+      <div class="flex items-baseline border-b border-gray-300 w-[80%] min-w-96 h-fit">
+        <%= form.label :description, style: "display: block", class: "font-bold" %>
+        <%= form.text_area :description, placeholder: "Enter a description of the deck", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
+      </div>
+    </div>
+    <div class="card-fields-container mb-10">
+      <%= form.fields_for :cards do |card_form| %>
+        <div class="mb-7 card-field">
+          <div class="flex items-baseline border-b border-gray-300 w-[85%] min-w-96 mr-20 mb-2">
+            <%= card_form.label :question, "Question", style: "display: block", class: "font-bold" %>
+            <%= card_form.text_area :question, placeholder: "Write a question", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
+          </div>
+          <div class="flex items-baseline border-b border-gray-300 w-[85%] min-w-96">
+            <%= card_form.label :answer, "Answer", style: "display: block", class: "font-bold" %>
+            <%= card_form.text_area :answer, placeholder: "Write an answer", class: "px-3 py-2 w-full border-none focus:outline-none focus:ring-0 h-[40px]" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="w-[70%] flex justify-center">
+      <button type="button" id="add-card-btn" class="font-bold flex items-center bg-clear-sky px-4 py-4 rounded-3xl">
+        <span class="mr-4">
+          Add more pairs
+        </span>
+        <%= image_tag("icons/add-more-pairs.svg") %>
+      </button>
+    </div>
+    <div>
+      <%= form.submit "Save", class:"py-2 px-4 text-white bg-swiss-red rounded-full cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
