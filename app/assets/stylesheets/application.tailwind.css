@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'AkzidenzGrotesk';
-  src: url('/fonts/AkzidenzGrotesk.ttf');
+  src: font-url('AkzidenzGrotesk.ttf') format('truetype');
 }
 
 h1, h2, h3 {

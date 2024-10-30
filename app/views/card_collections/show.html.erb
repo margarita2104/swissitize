@@ -1,49 +1,51 @@
-<p style="color: green"><%= notice %></p>
-<h1 class="text-2xl mb-3">
-  <%= @card_collection.name %>
-</h1>
-<p class="mb-5 text-sm">
-  <%= @card_collection.description %>
-</p>
-<% if @card_collection.cards.any? %>
-  <div id="practice-card" class="w-2/3 mb-10 shadow-lg min-h-80 cursor-pointer bg-[#E5E3E321] rounded-3xl flex items-center justify-center px-10">
-    <div class="text-center">
-      <p class="font-semibold mb-5" id="question"><%= @card_collection.cards.first.question %></p>
-      <p class="hidden" id="answer"><%= @card_collection.cards.first.answer %></p>
+<div class="container mx-auto px-10 mt-10 flex flex-col">
+  <p style="color: green"><%= notice %></p>
+  <h1 class="text-2xl mb-3">
+    <%= @card_collection.name %>
+  </h1>
+  <p class="mb-5 text-sm">
+    <%= @card_collection.description %>
+  </p>
+  <% if @card_collection.cards.any? %>
+    <div id="practice-card" class="w-2/3 mb-10 shadow-lg min-h-80 cursor-pointer bg-[#E5E3E321] rounded-3xl flex items-center justify-center px-10">
+      <div class="text-center">
+        <p class="font-semibold mb-5" id="question"><%= @card_collection.cards.first.question %></p>
+        <p class="hidden" id="answer"><%= @card_collection.cards.first.answer %></p>
+      </div>
     </div>
-  </div>
-  <div class="w-2/3 flex justify-between items-center">
-    <div class="flex items-center gap-5">
-      <button id="play" data-collection-id="<%= @card_collection.id %>">
-        <%= image_tag("icons/play-cards.svg", style: "width: 40px") %>
-      </button>
-      <button id="shuffle" data-collection-id="<%= @card_collection.id %>">
-        <%= image_tag("icons/shuffle-cards.svg", style: "width: 40px") %>
-      </button>
-    </div>
-    <div class="flex items-center gap-5">
-      <button id="prev" data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
-        <%= image_tag("icons/previous-card.svg", style: "width: 40px") %>
-      </button>
-      <span>
-        <span id="card-index">
-          <%= @card_collection.cards.index(@card_collection.cards.first) + 1 %> / <%= @card_collection.cards.size %>
+    <div class="w-2/3 flex justify-between items-center">
+      <div class="flex items-center gap-5">
+        <button id="play" data-collection-id="<%= @card_collection.id %>">
+          <%= image_tag("icons/play-cards.svg", style: "width: 40px") %>
+        </button>
+        <button id="shuffle" data-collection-id="<%= @card_collection.id %>">
+          <%= image_tag("icons/shuffle-cards.svg", style: "width: 40px") %>
+        </button>
+      </div>
+      <div class="flex items-center gap-5">
+        <button id="prev" data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
+          <%= image_tag("icons/previous-card.svg", style: "width: 40px") %>
+        </button>
+        <span>
+          <span id="card-index">
+            <%= @card_collection.cards.index(@card_collection.cards.first) + 1 %> / <%= @card_collection.cards.size %>
+          </span>
         </span>
-      </span>
-      <button id="next" data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
-        <%= image_tag("icons/next-card.svg", style: "width: 40px") %>
-      </button>
+        <button id="next" data-card-id="<%= @card_collection.cards.first.id %>" data-collection-id="<%= @card_collection.id %>">
+          <%= image_tag("icons/next-card.svg", style: "width: 40px") %>
+        </button>
+      </div>
+      <div class="flex items-center">
+        <%= link_to edit_card_collection_path(@card_collection) do %>
+          <%= image_tag("icons/edit.svg", style: "width: 40px") %>
+        <% end %>
+      </div>
     </div>
-    <div class="flex items-center">
-      <%= link_to edit_card_collection_path(@card_collection) do %>
-        <%= image_tag("icons/edit.svg", style: "width: 40px") %>
-      <% end %>
-    </div>
+  <% else %>
+    <p>No cards available for this collection.</p>
+  <% end %>
+  <div>
+    <%= link_to "Back to practice decks", card_collections_path %>
+    <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
   </div>
-<% else %>
-  <p>No cards available for this collection.</p>
-<% end %>
-<div>
-  <%= link_to "Back to practice decks", card_collections_path %>
-  <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
 </div>
