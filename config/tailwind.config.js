@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         'swiss-red': '#DA291C',
+        'thunderbird': "#BC2015",
         'clear-sky': '#EAFFFC',
         'gold':'#FFD700',
         'mercury':'#E5E3E3',
