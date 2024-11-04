@@ -20,10 +20,10 @@ class AddDeviseToUsers < ActiveRecord::Migration[6.0]
       # t.string   :last_sign_in_ip
 
       # Uncomment if needed
-      # t.string :confirmation_token
-      # t.datetime :confirmed_at
-      # t.datetime :confirmation_sent_at
-      # t.string :unconfirmed_email
+      t.string :confirmation_token
+      t.datetime :confirmed_at
+      t.datetime :confirmation_sent_at
+      t.string :unconfirmed_email
     end
 
     add_index :users, :email, unique: true
