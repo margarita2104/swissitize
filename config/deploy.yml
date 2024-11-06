@@ -1,17 +1,32 @@
 # Name of your application. Used to uniquely configure containers.
-service: my-app
+service: swissitize
 
 # Name of the container image.
-image: my-user/my-app
+image: margarita2104/swissitize
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 116.203.85.111
   # job:
   #   hosts:
   #     - 192.168.0.1
   #   cmd: bin/jobs
+
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
+volumes:
+  - "swissitize:/rails/storage"
+
+assets_path: /rails/public/assets
+
+builder:
+  arch: amd64
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
@@ -19,7 +34,7 @@ servers:
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption. 
 proxy: 
   ssl: true
-  host: app.example.com
+  host: swissitize.apps.rubymonstas.ch
   # Proxy connects to your container on port 80 by default.
   # app_port: 3000
 
@@ -27,7 +42,8 @@ proxy:
 registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
-  username: my-user
+  server: ghcr.io
+  username: margarita2104
 
   # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
