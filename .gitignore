@@ -26,6 +26,7 @@
 /config/credentials.yml.enc
 /config/master.key
 /config/puma/*.key
+/config/registry-token
 
 # Ignore environment-specific settings.
 /.env
@@ -70,3 +71,4 @@ Thumbs.db
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
