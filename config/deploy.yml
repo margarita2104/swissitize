@@ -23,7 +23,7 @@ aliases:
 volumes:
   - "swissitize:/rails/storage"
 
-assets_path: /rails/public/assets
+asset_path: /rails/public/assets
 
 builder:
   arch: amd64
