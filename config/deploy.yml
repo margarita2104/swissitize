@@ -23,7 +23,7 @@ aliases:
 volumes:
   - "swissitize:/rails/storage"
 
-assets_path: /rails/public/assets
+asset_path: /rails/public/assets
 
 builder:
   arch: amd64
@@ -43,7 +43,7 @@ registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
   server: ghcr.io
-  username: margarita2104
+  username: nerdinand
 
   # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
