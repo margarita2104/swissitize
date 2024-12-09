@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users
 
   # Card Collections and Cards
   resources :card_collections do
