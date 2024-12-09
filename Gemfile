@@ -63,4 +63,7 @@ gem 'tailwindcss-rails', '~> 2.7'
 
 gem 'devise', '~> 4.9'
 
-gem 'kamal', '~> 2.2'
+gem 'kamal', '~> 2.3'
+
+# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
+gem 'thruster', require: false
