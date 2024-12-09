@@ -23,7 +23,7 @@ aliases:
 volumes:
   - "swissitize:/rails/storage"
 
-assets_path: /rails/public/assets
+asset_path: /rails/public/assets
 
 builder:
   arch: amd64
@@ -52,6 +52,10 @@ registry:
 # Configure builder setup.
 builder:
   arch: amd64
+
+env:
+  secret:
+    - RAILS_MASTER_KEY
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
