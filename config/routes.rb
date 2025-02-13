@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   unauthenticated do
-    root 'home#index'
+    root 'home#index', as: :unauthenticated_root
   end
 
   # Enable `/home` path for everyone
