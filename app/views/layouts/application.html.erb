@@ -26,9 +26,9 @@
       <nav>
         <ul class="flex gap-24">
           <li><a href="<%= home_path %>" class="hover:text-gold">Home</a></li>
-          <li><a href="#about" class="hover:text-gold">About</a></li>
-          <li><a href="#how-to" class="hover:text-gold">How to use</a></li>
-          <li><a href="#contact" class="hover:text-gold">Contact</a></li>
+          <li><a href="<%= home_path(anchor: 'about') %>" class="hover:text-gold">About</a></li>
+          <li><a href="<%= home_path(anchor: 'how-to') %>" class="hover:text-gold">How to use</a></li>
+          <li><a href="<%= home_path(anchor: 'contact') %>" class="hover:text-gold">Contact</a></li>
         </ul>
       </nav>
       <% if user_signed_in? %>
