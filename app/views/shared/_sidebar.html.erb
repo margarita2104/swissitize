@@ -1,0 +1,39 @@
+<div class="p-6 w-[22%] border-r border-mercury" id="side-bar">
+  <button class="mb-6 pl-2" id="toggle-visibility">
+    <%= image_tag("icons/eye-open.svg", id: "eye-icon") %>
+  </button>
+  <nav id="side-menu">
+    <ul class="flex flex-col" id="side-list">
+      <li class="mb-2">
+        <%= link_to home_path, class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
+          <%= image_tag("icons/home.svg", style: "width: 40px") %>
+          <span class="nav-text ml-5">Home</span>
+        <% end %>
+      </li>
+      <li class="mb-2">
+        <%= link_to user_path(current_user), class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
+          <%= image_tag("icons/profile.svg", style: "width: 40px") %>
+          <span class="nav-text ml-5">Your profile</span>
+        <% end %>
+      </li>
+      <li class="mb-2">
+        <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
+          <%= image_tag("icons/your-library.svg", style: "width: 40px") %>
+          <span class="nav-text ml-5">Your library</span>
+        <% end %>
+      </li>
+      <li class="mb-2">
+        <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
+          <%= image_tag("icons/base-decks.svg", style: "width: 40px") %>
+          <span class="nav-text ml-5">Base decks</span>
+        <% end %>
+      </li>
+      <li class="mb-2">
+        <%= link_to "#", class: "flex items-center hover:bg-clear-sky px-4 py-4 rounded-3xl" do %>
+          <%= image_tag("icons/explore.svg", style: "width: 40px") %>
+          <span class="nav-text ml-5">Explore</span>
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</div>

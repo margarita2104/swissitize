@@ -1,29 +1,39 @@
-document.addEventListener("turbo:load", function () {
+document.addEventListener("turbo:load", initSidebar);
+document.addEventListener("DOMContentLoaded", initSidebar);
+
+function initSidebar() {
+  const sideMenu = document.getElementById("side-menu");
+  const sideBar = document.getElementById("side-bar");
+  const eyeIcon = document.getElementById("eye-icon");
+  const sideList = document.getElementById("side-list");
+  const toggleButton = document.getElementById("toggle-visibility");
+
+  if (sideMenu && sideBar && eyeIcon && sideList && toggleButton) {
+    if (localStorage.getItem("sideMenuCollapsed") === "true") {
+      collapseSidebar();
+    }
+    toggleButton.removeEventListener("click", toggleSidebar);
+    toggleButton.addEventListener("click", toggleSidebar);
+  }
+}
+
+function toggleSidebar() {
   const sideMenu = document.getElementById("side-menu");
   const sideBar = document.getElementById("side-bar");
   const eyeIcon = document.getElementById("eye-icon");
   const sideList = document.getElementById("side-list");
 
-  if (localStorage.getItem("sideMenuCollapsed") === "true") {
-    sideMenu.classList.add("hide-text");
-    sideBar.classList.remove("w-[22%]");
-    sideList.classList.add("items-center");
-    eyeIcon.src = "/assets/icons/eye-closed.svg";
-  }
+  const isCollapsed = sideMenu.classList.toggle("hide-text");
+  sideBar.classList.toggle("w-[22%]");
+  sideList.classList.toggle("items-center");
 
-  document
-    .getElementById("toggle-visibility")
-    .addEventListener("click", function () {
-      const isCollapsed = sideMenu.classList.toggle("hide-text");
-      sideBar.classList.toggle("w-[22%]");
-      sideList.classList.toggle("items-center");
+  eyeIcon.src = isCollapsed ? "/assets/icons/eye-closed.svg" : "/assets/icons/eye-open.svg";
+  localStorage.setItem("sideMenuCollapsed", isCollapsed.toString());
+}
 
-      if (isCollapsed) {
-        eyeIcon.src = "/assets/icons/eye-closed.svg";
-        localStorage.setItem("sideMenuCollapsed", "true");
-      } else {
-        eyeIcon.src = "/assets/icons/eye-open.svg";
-        localStorage.setItem("sideMenuCollapsed", "false");
-      }
-    });
-});
+function collapseSidebar() {
+  document.getElementById("side-menu").classList.add("hide-text");
+  document.getElementById("side-bar").classList.remove("w-[22%]");
+  document.getElementById("side-list").classList.add("items-center");
+  document.getElementById("eye-icon").src = "/assets/icons/eye-closed.svg";
+}

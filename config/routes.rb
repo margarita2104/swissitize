@@ -1,13 +1,26 @@
+# config/routes.rb
 Rails.application.routes.draw do
-  root 'home#index'
-  get 'home/index'
+  # Authenticated vs. Unauthenticated Root
+  authenticated :user do
+    root 'users#show', as: :authenticated_root
+  end
 
+  unauthenticated do
+    root 'home#index'
+  end
+
+  # Enable `/home` path for everyone
+  get 'home', to: 'home#index', as: :home
+
+  # Devise Routes
   devise_for :users
+
+  # Users Routes
+  resources :users, only: %i[index show new create edit update destroy]
 
   # Card Collections and Cards
   resources :card_collections do
     resources :cards
-
     member do
       get 'next_card', to: 'card_collections#show_next_card'
       get 'previous_card', to: 'card_collections#show_previous_card'
@@ -17,7 +30,6 @@ Rails.application.routes.draw do
 
   # User Collection Relationships and Other Routes
   resources :user_collection_relationships
-  resources :users
 
   # Health and PWA Routes
   get 'up' => 'rails/health#show', as: :rails_health_check
