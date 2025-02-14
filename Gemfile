@@ -67,3 +67,7 @@ gem 'kamal', '~> 2.3'
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem 'thruster', require: false
+
+gem 'rubyzip', '~> 2.3.0'
+
+gem 'psych', '~> 4.0.6'

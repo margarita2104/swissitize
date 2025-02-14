@@ -6,7 +6,13 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
+    apt-get install --no-install-recommends -y \
+    curl \
+    libjemalloc2 \
+    libvips \
+    sqlite3 \
+    pkg-config \
+    libyaml-0-2 && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 ENV RAILS_ENV="production" \
@@ -15,8 +21,14 @@ ENV RAILS_ENV="production" \
 
 FROM base AS build
 
+# Install build dependencies
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git pkg-config && \
+    apt-get install --no-install-recommends -y \
+    build-essential \
+    git \
+    pkg-config \
+    libyaml-dev \
+    libpq-dev && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 # Configure bundler
@@ -25,6 +37,8 @@ RUN gem install bundler:2.5.22 && \
     bundle config set --local frozen false
 
 COPY Gemfile Gemfile.lock ./
+
+# Install gems
 RUN bundle install
 
 COPY . .
