@@ -3,55 +3,48 @@ FROM ruby:3.3-slim
 
 WORKDIR /rails
 
-# Install dependencies
+# Force rebuild every time
+RUN echo $(date) > builddate
+
+# Install minimal dependencies
 RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
+    apt-get install --no-install-recommends -y \
     build-essential \
     curl \
     git \
-    libsqlite3-dev \
+    libpq-dev \
+    libyaml-dev \
     nodejs \
     pkg-config && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
-# Set environment variables
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
-    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_DEPLOYMENT="0" \
     RAILS_LOG_TO_STDOUT="true" \
     RAILS_SERVE_STATIC_FILES="true"
 
-# Copy dependency files
+# Copy only what's needed for bundle install
 COPY Gemfile Gemfile.lock ./
 
 # Install bundler and gems
 RUN gem install bundler:2.5.22 && \
-    bundle config set --local frozen true && \
+    bundle config set --local frozen false && \
     bundle install
 
-# Copy entire application
+# Copy application code
 COPY . .
 
-# Precompile assets
-RUN bundle exec rails assets:precompile
-
-# Create directories
+# Create required directories and ensure assets directory exists
 RUN mkdir -p tmp/pids tmp/cache public/assets && \
     touch public/assets/.keep
 
-# Create Rails user
+# Create user and set permissions
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails /rails
 
-# Switch to Rails user
 USER rails:rails
+EXPOSE 80
 
-# Expose Puma's port
-EXPOSE 3000
-
-# Health check
-HEALTHCHECK --interval=10s --timeout=5s --start_period=30s \
-  CMD curl -f http://localhost:3000/up || exit 1
-
-# Start Rails server
-CMD ["./bin/rails", "server", "-e", "production", "-b", "0.0.0.0", "-p", "3000"]
+# Simple start command
+CMD ["./bin/rails", "s", "-b", "0.0.0.0"]
