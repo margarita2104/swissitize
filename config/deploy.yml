@@ -4,12 +4,6 @@ image: margarita2104/swissitize
 servers:
   web:
     - 116.203.85.111
-    healthcheck:
-      command: curl -f http://localhost:3000/up
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
 
 proxy:
   ssl: true
