@@ -24,9 +24,9 @@ env:
 
 volumes:
   - "swissitize_app_storage:/rails/storage"
-  - "swissitize_public_assets:/rails/public/assets"
+  # - "swissitize_public_assets:/rails/public/assets"
 
-# asset_path: /rails/public/assets
+asset_path: /rails/public/assets
 
 aliases:
   console: app exec --interactive --reuse "bin/rails console"
