@@ -30,6 +30,9 @@ RUN gem install bundler:2.5.22 && \
 
 COPY . .
 
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
 # Create required directories and ensure they're writable
 RUN mkdir -p tmp/pids tmp/cache public/assets db storage && \
     touch public/assets/.keep && \
