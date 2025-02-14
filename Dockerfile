@@ -68,7 +68,11 @@ RUN groupadd --system --gid 1000 rails && \
 # Switch to non-root user
 USER 1000:1000
 
-# Expose port
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+USER rails:rails
 EXPOSE 80
 
 # Set entrypoint and default command
