@@ -61,6 +61,8 @@ end
 
 gem 'tailwindcss-rails', '~> 2.7'
 
+gem 'terser'
+
 gem 'devise', '~> 4.9'
 
 gem 'kamal', '~> 2.3'
