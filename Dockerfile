@@ -35,8 +35,6 @@ RUN gem install bundler:2.5.22 && \
 # Copy application code
 COPY . .
 
-RUN bundle exec rails assets:precompile
-
 # Create required directories and ensure assets directory exists
 RUN mkdir -p tmp/pids tmp/cache public/assets && \
     touch public/assets/.keep
