@@ -46,6 +46,9 @@ RUN mkdir -p tmp/pids tmp/cache public/assets && \
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails /rails
 
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
 USER rails:rails
 EXPOSE 80
 
