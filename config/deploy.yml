@@ -21,6 +21,9 @@ builder:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - GMAIL_DOMAIN
+    - GMAIL_USERNAME
+    - GMAIL_PASSWORD
 
 volumes:
   - "swissitize_db:/rails/db"
