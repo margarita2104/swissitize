@@ -34,17 +34,17 @@ COPY . .
 RUN mkdir -p tmp/pids tmp/cache public/assets db storage && \
     touch public/assets/.keep
 
-# Set up user and permissions
+# Copy and set up entrypoint before changing user
+COPY bin/docker-entrypoint /rails/bin/
+RUN chmod +x /rails/bin/docker-entrypoint
+
+# Set up user and permissions last
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails /rails
 
 USER rails:rails
 EXPOSE 80
-
-# Add database setup to entrypoint
-COPY bin/docker-entrypoint /rails/bin/
-RUN chmod +x /rails/bin/docker-entrypoint
 
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 CMD ["./bin/rails", "s", "-b", "0.0.0.0", "-p", "80"]
