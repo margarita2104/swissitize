@@ -1,12 +1,17 @@
 #!/bin/bash -e
 
-# Enable jemalloc for reduced memory usage and latency
-if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
-  export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
-fi
+# Create db directory if it doesn't exist
+mkdir -p /rails/db
 
 # If running the rails server then create or migrate existing database
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "s" ]; then
+  # Wait for db directory to be mounted
+  until [ -w /rails/db ]; do
+    echo "Waiting for db directory to be writable..."
+    sleep 1
+  done
+  
+  # Prepare database
   ./bin/rails db:prepare
 fi
 

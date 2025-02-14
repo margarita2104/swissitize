@@ -30,15 +30,16 @@ RUN gem install bundler:2.5.22 && \
 
 COPY . .
 
-# Create required directories
+# Create required directories and ensure they're writable
 RUN mkdir -p tmp/pids tmp/cache public/assets db storage && \
-    touch public/assets/.keep
+    touch public/assets/.keep && \
+    chmod -R 777 db tmp storage public/assets
 
 # Copy and set up entrypoint before changing user
 COPY bin/docker-entrypoint /rails/bin/
 RUN chmod +x /rails/bin/docker-entrypoint
 
-# Set up user and permissions last
+# Set up user and permissions
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails /rails
