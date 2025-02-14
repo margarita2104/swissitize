@@ -1,6 +1,5 @@
 service: swissitize
 image: margarita2104/swissitize
-
 servers:
   web:
     - 116.203.85.111
@@ -23,14 +22,12 @@ env:
     - RAILS_MASTER_KEY
 
 volumes:
-  - "swissitize_app_storage:/rails/storage"
   - "swissitize_db:/rails/db"
+  - "swissitize_storage:/rails/storage"
   # - "swissitize_public_assets:/rails/public/assets"
 
 asset_path: /rails/public/assets
 
-aliases:
-  console: app exec --interactive --reuse "bin/rails console"
-  shell: app exec --interactive --reuse "bash"
-  logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+healthcheck:
+  max_attempts: 10  # Add this to give more time for db setup
+  interval: 5s      # Check every 5 seconds
