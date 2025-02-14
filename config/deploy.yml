@@ -4,6 +4,12 @@ image: margarita2104/swissitize
 servers:
   web:
     - 116.203.85.111
+  healthcheck:
+    port: 3000
+    path: /up
+    interval: 10s
+    timeout: 5s
+    start_period: 30s
 
 proxy:
   ssl: true
