@@ -1,6 +1,11 @@
 <div class="p-6 w-[22%] border-r border-mercury" id="side-bar">
   <button class="mb-6 pl-2" id="toggle-visibility">
-    <%= image_tag("icons/eye-open.svg", id: "eye-icon") %>
+    <%= image_tag("icons/eye-open.svg", 
+                  id: "eye-icon",
+                  data: { 
+                    open_icon: asset_path("icons/eye-open.svg"),
+                    closed_icon: asset_path("icons/eye-closed.svg")
+                  }) %>
   </button>
   <nav id="side-menu">
     <ul class="flex flex-col" id="side-list">
