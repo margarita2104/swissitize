@@ -13,7 +13,7 @@ RUN apt-get update -qq && \
     libyaml-dev \
     nodejs \
     pkg-config \
-    sqlite3 && \    # Add sqlite3 package
+    sqlite3 && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 ENV RAILS_ENV="production" \
