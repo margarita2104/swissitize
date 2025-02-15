@@ -13,6 +13,8 @@ class User < ApplicationRecord
   end
 
   attribute :languages, :string, default: '[]'
+  attribute :canton, :string, default: 'Not specified'
+  attribute :country_of_origin, :string, default: 'Not specified'
 
   before_save :ensure_languages_array
 
