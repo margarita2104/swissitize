@@ -9,23 +9,20 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, on: :update
 
   def name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 
-  # Method to display languages as a string
-  def languages_list
-    languages.join(', ')
-  end
+  attribute :languages, :string, default: '[]'
 
   before_save :ensure_languages_array
 
   def languages_list
-    JSON.parse(languages).join(', ')
+    JSON.parse(languages || '[]').join(', ')
   end
 
   private
 
   def ensure_languages_array
-    self.languages = '[]' if languages.nil?
+    self.languages = '[]' if languages.blank?
   end
 end
