@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @achievements = @user.achievements
   end
 
   # GET /users/new
@@ -61,8 +62,11 @@ class UsersController < ApplicationController
 
   # Set the user before actions
   def set_user
-    @user = User.find_by(id: params[:id]) || current_user
-    redirect_to users_path, alert: 'User not found' unless @user
+    @user = User.find_by(id: params[:id])
+
+    return unless @user.nil?
+
+    redirect_to users_path, alert: 'User not found'
   end
 
   # Allow trusted parameters through
