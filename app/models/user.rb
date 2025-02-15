@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :activities
 
   validates :username, uniqueness: true, allow_blank: true
-  validates :first_name, :last_name, presence: true, on: update
+  validates :first_name, :last_name, presence: true, on: :update
 
   def name
     "#{first_name} #{last_name}"
