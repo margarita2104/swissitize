@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :achievements
   has_many :activities
 
-  validates :first_name, :last_name, :username, presence: true
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true, allow_blank: true
+  validates :first_name, :last_name, presence: true, on: update
 
   def name
     "#{first_name} #{last_name}"
