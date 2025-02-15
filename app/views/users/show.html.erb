@@ -23,14 +23,18 @@
     <!-- Achievements -->
     <h2 class="text-lg font-bold">Achievements</h2>
     <div class="border rounded-lg p-4 mt-2">
-      <% @user.achievements.each do |achievement| %>
-        <div class="flex items-center mb-3">
-          <%= image_tag("icons/medal.svg", class: "w-8 h-8") %>
-          <div class="ml-3">
-            <p class="font-bold"><%= achievement.title %></p>
-            <p class="text-gray-500 text-sm"><%= achievement.description %></p>
+      <% if @achievements.any? %>
+        <% @achievements.each do |achievement| %>
+          <div class="flex items-center mb-3">
+            <%= image_tag("icons/medal.svg", class: "w-8 h-8") %>
+            <div class="ml-3">
+              <p class="font-bold"><%= achievement.title %></p>
+              <p class="text-gray-500 text-sm"><%= achievement.description %></p>
+            </div>
           </div>
-        </div>
+        <% end %>
+      <% else %>
+        <p>No achievements yet.</p>
       <% end %>
     </div>
     <!-- Activity Calendar -->
