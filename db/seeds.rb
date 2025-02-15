@@ -7,3 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+User.first.achievements.create([
+                                 { title: 'Heidi’s Apprentice', description: 'Complete your first flashcard deck' },
+                                 { title: 'Swiss Timekeeper', description: 'Maintain a streak for 3 days' },
+                                 { title: 'Swiss Army Knife', description: 'Create your own custom flashcard deck' }
+                               ])

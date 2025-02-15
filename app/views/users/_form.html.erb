@@ -1,32 +1,43 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
+<%= form_with(model: @user, url: user_path(@user), method: :patch) do |f| %>
+  <% if @user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
       <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
   <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
+    <%= f.label :username, style: "display: block" %>
+    <%= f.text_field :username %>
   </div>
-
   <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
+    <%= f.label :first_name, style: "display: block" %>
+    <%= f.text_field :first_name %>
   </div>
-
   <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
+    <%= f.label :last_name, style: "display: block" %>
+    <%= f.text_field :last_name %>
   </div>
-
   <div>
-    <%= form.submit %>
+    <%= f.label :canton, style: "display: block" %>
+    <%= f.text_field :canton %>
+  </div>
+  <div>
+    <%= f.label :country_of_origin, style: "display: block" %>
+    <%= f.text_field :country_of_origin %>
+  </div>
+  <div>
+    <%= f.label :languages, style: "display: block" %>
+    <%= f.text_field :languages, placeholder: "Comma-separated (e.g., English, French)" %>
+  </div>
+  <div>
+    <%= f.label :avatar, style: "display: block" %>
+    <%= f.text_field :avatar, placeholder: "Profile picture URL" %>
+  </div>
+  <div>
+    <%= f.submit "Update Profile" %>
   </div>
 <% end %>

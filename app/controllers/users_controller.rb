@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
-  # GET /users or /users.json
+  # GET /users
   def index
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
+  # GET /users/1
   def show
   end
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users or /users.json
+  # POST /users
   def create
     @user = User.new(user_params)
 
@@ -34,11 +34,11 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
+  # PATCH/PUT /users/1
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to user_url(@user), notice: 'Profile successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,30 +47,31 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # DELETE /users/1
   def destroy
     @user.destroy!
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Set the user before actions
   def set_user
-    if params[:id].present?
-      @user = User.find_by(id: params[:id])
-      redirect_to users_path, alert: 'User not found' unless @user
-    else
-      redirect_to users_path, alert: 'Invalid request'
-    end
+    @user = User.find_by(id: params[:id]) || current_user
+    redirect_to users_path, alert: 'User not found' unless @user
   end
 
-  # Only allow a list of trusted parameters through.
+  # Allow trusted parameters through
   def user_params
-    params.require(:user).permit(:username, :first_name, :last_name)
+    params.require(:user).permit(:username, :first_name, :last_name, :canton, :country_of_origin,
+                                 :avatar).tap do |user_params|
+      if params[:user][:languages].present?
+        user_params[:languages] = params[:user][:languages].split(',').map(&:strip).to_json
+      end
+    end
   end
 end
