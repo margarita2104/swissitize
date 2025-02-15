@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_30_162941) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_15_171748) do
+  create_table "achievements", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_achievements_on_user_id"
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
   create_table "card_collections", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -51,10 +68,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_30_162941) do
     t.datetime "confirmed_at", precision: nil
     t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
+    t.string "canton"
+    t.string "country_of_origin"
+    t.string "avatar"
+    t.text "languages", default: "[]"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "achievements", "users"
+  add_foreign_key "activities", "users"
   add_foreign_key "cards", "card_collections"
   add_foreign_key "user_collection_relationships", "card_collections"
   add_foreign_key "user_collection_relationships", "users"
