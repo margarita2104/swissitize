@@ -1,49 +1,65 @@
-<%= form_with(model: @user, url: user_path(@user), method: :patch) do |f| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div>
-    <%= f.label :username, style: "display: block" %>
-    <%= f.text_field :username %>
-  </div>
-  <div>
-    <%= f.label :first_name, style: "display: block" %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div>
-    <%= f.label :last_name, style: "display: block" %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div>
-    <%= f.label :canton, style: "display: block" %>
-    <%= f.text_field :canton %>
-  </div>
-  <div>
-    <%= f.label :country_of_origin, style: "display: block" %>
-    <%= f.text_field :country_of_origin %>
-  </div>
-  <div>
-    <%= f.label :languages, style: "display: block" %>
-    <%= f.text_field :languages, placeholder: "Comma-separated (e.g., English, French)" %>
-  </div>
-  <div>
-    <%= f.label :avatar, "Profile Picture", style: "display: block" %>
-    <%= f.file_field :avatar, accept: 'image/*' %>
-    <% if @user.avatar.attached? %>
-      <div class="mt-2">
-        <p>Current avatar:</p>
-        <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full" %>
+<div class="container mx-auto px-10 mt-10">
+  <h2 class="text-3xl font-bold text-gray-800 mb-6">Edit Profile</h2>
+  <%= form_with(model: @user, url: user_path(@user), method: :patch, html: { class: "space-y-6" }) do |f| %>
+    <!-- Display Errors -->
+    <% if @user.errors.any? %>
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
+        <h3 class="font-semibold"><%= pluralize(@user.errors.count, "error") %> prevented this profile from being saved:</h3>
+        <ul class="list-disc list-inside">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
-  </div>
-  <div>
-    <%= f.submit "Update Profile" %>
-  </div>
-<% end %>
+    <!-- Form Fields in Two Columns -->
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Username -->
+      <div>
+        <%= f.label :username, class: "block text-gray-700 font-medium mb-1" %>
+        <%= f.text_field :username, class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+      </div>
+      <!-- First Name -->
+      <div>
+        <%= f.label :first_name, class: "block text-gray-700 font-medium mb-1" %>
+        <%= f.text_field :first_name, class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+      </div>
+      <!-- Last Name -->
+      <div>
+        <%= f.label :last_name, class: "block text-gray-700 font-medium mb-1" %>
+        <%= f.text_field :last_name, class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+      </div>
+      <!-- Canton -->
+      <div>
+        <%= f.label :canton, class: "block text-gray-700 font-medium mb-1" %>
+        <%= f.text_field :canton, class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+      </div>
+      <!-- Country of Origin -->
+      <div>
+        <%= f.label :country_of_origin, class: "block text-gray-700 font-medium mb-1" %>
+        <%= f.text_field :country_of_origin, class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+      </div>
+      <!-- Languages -->
+      <div>
+        <%= f.label :languages, class: "block text-gray-700 font-medium mb-1" %>
+        <%= f.text_field :languages, placeholder: "Comma-separated (e.g., English, French)", class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+      </div>
+    </div>
+    <!-- Profile Picture Upload -->
+    <div class="mt-6">
+      <%= f.label :avatar, "Profile Picture", class: "block text-gray-700 font-medium mb-1" %>
+      <%= f.file_field :avatar, accept: 'image/*', class: "w-1/2 text-gray-700 border border-gray-300 p-2 rounded-lg focus:ring focus:ring-blue-300" %>
+      <% if @user.avatar.attached? %>
+        <div class="mt-4 flex items-center space-x-4">
+          <p style="margin-right: 40px;">Current avatar:</p>
+          <%= image_tag @user.avatar, class: "w-24 h-24 rounded-full border border-gray-300 shadow-sm", style:"width: 100px; height: 100px" %>
+        </div>
+      <% end %>
+    </div>
+    <!-- Submit Button -->
+    <div style="margin-top: 24px;">
+      <%= f.submit "Update Profile", class:"py-2 px-4 text-white bg-swiss-red rounded-full cursor-pointer"
+   %>
+    </div>
+  <% end %>
+</div>

@@ -28,11 +28,11 @@
   <div class="flex w-full mb-10" style="gap: 40px;">
     <div class="w-1/2">
       <h2 class="text-lg font-bold">Achievements</h2>
-      <div class="border rounded-lg p-4 mt-2">
+      <div class="border rounded-lg p-5 mt-2">
         <% if @achievements.any? %>
           <% @achievements.each do |achievement| %>
-            <div class="flex items-center mb-3">
-              <%= image_tag("icons/medal.svg", class: "w-8 h-8") %>
+            <div class="flex items-center mb-5">
+              <%= image_tag("icons/medal.svg", style: "margin-right: 35px") %>
               <div class="ml-3">
                 <p class="font-bold"><%= achievement.title %></p>
                 <p class="text-gray-500 text-sm"><%= achievement.description %></p>
@@ -46,7 +46,7 @@
     </div>
     <div class="w-1/2">
       <h2 class="text-lg font-bold mt-8">Activity</h2>
-      <div class="border rounded-lg p-4 mt-2">
+      <div class="border rounded-lg p-5 mt-2">
         <%= render "calendar", user: @user %>
       </div>
     </div>
