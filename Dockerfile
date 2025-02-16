@@ -39,17 +39,14 @@ COPY . .
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# Ensure directories are writable
-RUN chmod -R 777 db tmp storage public/assets storage/staging storage/variants storage/uploads && \
-    chown -R rails:rails storage
-
-# Copy and set up entrypoint
-RUN chmod +x /rails/bin/docker-entrypoint
-
-# Set up user and permissions
+# Set up user and permissions first
 RUN groupadd --system --gid 1000 rails && \
-    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails /rails
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash
+
+# Then set all the permissions
+RUN chmod -R 777 db tmp storage public/assets storage/staging storage/variants storage/uploads && \
+    chown -R rails:rails /rails && \
+    chmod +x /rails/bin/docker-entrypoint
 
 USER rails:rails
 EXPOSE 80
