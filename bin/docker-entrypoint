@@ -13,16 +13,17 @@ echo "Storage directory permissions:"
 ls -la /rails/storage
 
 # If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "s" ]; then
-  echo "Running database preparation..."
-  # Run database migrations
-  if bundle exec rails db:prepare 2>/dev/null; then
-    echo "Database prepared successfully"
-  else
-    echo "Database preparation failed, trying to create database first..."
-    bundle exec rails db:create
-    bundle exec rails db:migrate
-  fi
+if [ "${1}" = "./bin/rails" ] && [ "${2}" = "s" ]; then
+    echo "Running database preparation..."
+    
+    # Run database migrations
+    if bundle exec rails db:prepare; then
+        echo "Database prepared successfully"
+    else
+        echo "Database preparation failed, trying to create database first..."
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+    fi
 fi
 
 # Execute the main command
