@@ -34,8 +34,14 @@
     <%= f.text_field :languages, placeholder: "Comma-separated (e.g., English, French)" %>
   </div>
   <div>
-    <%= f.label :avatar, style: "display: block" %>
-    <%= f.text_field :avatar, placeholder: "Profile picture URL" %>
+    <%= f.label :avatar, "Profile Picture", style: "display: block" %>
+    <%= f.file_field :avatar, accept: 'image/*' %>
+    <% if @user.avatar.attached? %>
+      <div class="mt-2">
+        <p>Current avatar:</p>
+        <%= image_tag @user.avatar, class: "w-32 h-32 rounded-full" %>
+      </div>
+    <% end %>
   </div>
   <div>
     <%= f.submit "Update Profile" %>

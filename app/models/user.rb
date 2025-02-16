@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :achievements
   has_many :activities
+  has_one_attached :avatar
 
   validates :username, uniqueness: true, allow_blank: true
   validates :first_name, :last_name, presence: true, on: :update

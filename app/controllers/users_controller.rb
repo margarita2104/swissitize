@@ -72,10 +72,9 @@ class UsersController < ApplicationController
   # Allow trusted parameters through
   def user_params
     params.require(:user).permit(:username, :first_name, :last_name, :canton, :country_of_origin,
-                                 :avatar).tap do |user_params|
+                                 :avatar, :languages).tap do |user_params|
       if params[:user][:languages].present?
-        user_params[:languages] =
-          params[:user][:languages].split(',').map(&:strip).to_json
+        user_params[:languages] = params[:user][:languages].split(',').map(&:strip).to_json
       end
     end
   end

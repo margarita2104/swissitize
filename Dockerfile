@@ -28,7 +28,7 @@ RUN gem install bundler:2.5.22 && \
     bundle install
 
 # Create required directories
-RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage && \
+RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage/staging storage/variants storage/uploads && \
     touch public/assets/.keep && \
     touch /rails/db/production.sqlite3 && \
     chmod 666 /rails/db/production.sqlite3
@@ -40,7 +40,8 @@ COPY . .
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Ensure directories are writable
-RUN chmod -R 777 db tmp storage public/assets
+RUN chmod -R 777 db tmp storage public/assets storage/staging storage/variants storage/uploads && \
+    chown -R rails:rails storage
 
 # Copy and set up entrypoint
 RUN chmod +x /rails/bin/docker-entrypoint
