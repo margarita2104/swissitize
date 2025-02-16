@@ -29,7 +29,9 @@ RUN gem install bundler:2.5.22 && \
 
 # Create required directories
 RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage && \
-    touch public/assets/.keep
+    touch public/assets/.keep && \
+    touch /rails/db/production.sqlite3 && \
+    chmod 666 /rails/db/production.sqlite3
 
 # Now copy the entire application
 COPY . .
