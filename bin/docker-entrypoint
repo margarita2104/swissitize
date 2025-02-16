@@ -5,6 +5,11 @@ set -e
 mkdir -p /rails/db
 mkdir -p /rails/storage
 
+# Ensure the SQLite database file exists and has correct permissions
+touch /rails/db/production.sqlite3
+chmod 666 /rails/db/production.sqlite3
+chown rails:rails /rails/db/production.sqlite3
+
 # Add debugging output
 echo "Current directory: $(pwd)"
 echo "Database directory permissions:"
