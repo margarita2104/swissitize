@@ -28,7 +28,6 @@ env:
 volumes:
   - "swissitize_db:/rails/db"
   - "swissitize_storage:/rails/storage"
-  # - "swissitize_assets:/rails/public/assets"  # Single assets volume
 
 asset_path: /rails/public/assets
 

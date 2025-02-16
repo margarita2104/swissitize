@@ -28,10 +28,8 @@ RUN gem install bundler:2.5.22 && \
     bundle install
 
 # Create required directories
-RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage/staging storage/variants storage/uploads && \
-    touch public/assets/.keep && \
-    touch /rails/db/production.sqlite3 && \
-    chmod 666 /rails/db/production.sqlite3
+RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage && \
+    chmod -R 777 tmp public/assets storage
 
 # Now copy the entire application
 COPY . .
@@ -39,14 +37,10 @@ COPY . .
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# Set up user and permissions first
+# Set up user and permissions
 RUN groupadd --system --gid 1000 rails && \
-    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash
-
-# Then set all the permissions
-RUN chmod -R 777 db tmp storage public/assets storage/staging storage/variants storage/uploads && \
-    chown -R rails:rails /rails && \
-    chmod +x /rails/bin/docker-entrypoint
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails /rails
 
 USER rails:rails
 EXPOSE 80
