@@ -12,7 +12,8 @@ RUN apt-get update -qq && \
     libyaml-dev \
     nodejs \
     pkg-config \
-    sqlite3 && \
+    sqlite3 \
+    imagemagick && \ 
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 ENV RAILS_ENV="production" \
