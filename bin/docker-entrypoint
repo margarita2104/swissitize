@@ -1,34 +1,26 @@
 #!/bin/bash
 set -e
 
-# Create db directory if it doesn't exist
-mkdir -p /rails/db
-mkdir -p /rails/storage
+# Create directories if they don't exist
+mkdir -p /rails/db /rails/storage /rails/tmp/pids
 
-# Ensure the SQLite database file exists and has correct permissions
-touch /rails/db/production.sqlite3
-chmod 666 /rails/db/production.sqlite3
-chown rails:rails /rails/db/production.sqlite3
-
-# Add debugging output
-echo "Current directory: $(pwd)"
-echo "Database directory permissions:"
-ls -la /rails/db
-echo "Storage directory permissions:"
-ls -la /rails/storage
-
-# If running the rails server then create or migrate existing database
+# Database setup and migrations
 if [ "${1}" = "./bin/rails" ] && [ "${2}" = "s" ]; then
-    echo "Running database preparation..."
-    
-    # Run database migrations
-    if bundle exec rails db:prepare; then
-        echo "Database prepared successfully"
-    else
-        echo "Database preparation failed, trying to create database first..."
-        bundle exec rails db:create
-        bundle exec rails db:migrate
-    fi
+  # Check if database exists
+  if [ ! -f /rails/db/production.sqlite3 ]; then
+    echo "Database file does not exist. Creating..."
+    touch /rails/db/production.sqlite3
+    chmod 666 /rails/db/production.sqlite3
+  fi
+
+  echo "Running database migrations..."
+  bundle exec rails db:migrate
+
+  # If migrations fail, try preparing the database
+  if [ $? -ne 0 ]; then
+    echo "Migrations failed, trying database preparation..."
+    bundle exec rails db:prepare
+  fi
 fi
 
 # Execute the main command
