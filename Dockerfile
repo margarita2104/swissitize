@@ -1,6 +1,5 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.3-slim
-
 WORKDIR /rails
 
 # Install minimal dependencies
@@ -22,24 +21,26 @@ ENV RAILS_ENV="production" \
     RAILS_LOG_TO_STDOUT="true" \
     RAILS_SERVE_STATIC_FILES="true"
 
+# First, copy only the files needed for bundle install
 COPY Gemfile Gemfile.lock ./
-
 RUN gem install bundler:2.5.22 && \
     bundle config set --local frozen false && \
     bundle install
 
+# Create required directories
+RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage && \
+    touch public/assets/.keep
+
+# Now copy the entire application
 COPY . .
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# Create required directories and ensure they're writable
-RUN mkdir -p tmp/pids tmp/cache public/assets db storage && \
-    touch public/assets/.keep && \
-    chmod -R 777 db tmp storage public/assets
+# Ensure directories are writable
+RUN chmod -R 777 db tmp storage public/assets
 
-# Copy and set up entrypoint before changing user
-COPY bin/docker-entrypoint /rails/bin/
+# Copy and set up entrypoint
 RUN chmod +x /rails/bin/docker-entrypoint
 
 # Set up user and permissions
