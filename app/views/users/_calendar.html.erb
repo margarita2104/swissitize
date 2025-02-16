@@ -1,13 +1,23 @@
 <% current_month = Date.today.strftime("%B %Y") %>
-<h3 class="text-center text-gray-700"><%= current_month %></h3>
-<div class="grid grid-cols-7 text-center text-gray-500 text-sm mt-2">
-  <span>M</span> <span>T</span> <span>W</span> <span>T</span> <span>F</span> <span>S</span> <span>S</span>
+<h3 style="text-align: center; color: black; font-size: 1.25rem; margin-top: 0.5rem; margin-bottom: 0.5rem;"><%= current_month %></h3>
+<!-- Weekday Headers (Black Text, Centered) -->
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; color: black; font-weight: bold; font-size: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid lightgray;">
+  <span>Mon</span> <span>Tue</span> <span>Wed</span> <span>Thu</span> <span>Fri</span> <span>Sat</span> <span>Sun</span>
 </div>
-<div class="grid grid-cols-7 text-center text-gray-800 mt-2">
-  <% (Date.today.beginning_of_month..Date.today.end_of_month).each do |date| %>
+<!-- Calendar Grid (Properly Aligned) -->
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; color: black; margin-top: 0.5rem; gap: 2px;">
+  <% first_day = Date.today.beginning_of_month %>
+  <% last_day = Date.today.end_of_month %>
+  <% start_offset = first_day.wday == 0 ? 6 : first_day.wday - 1 %>
+  <!-- Empty placeholders before the 1st day of the month -->
+  <% start_offset.times do %>
+    <div style="width: 80px; height: 40px;"></div>
+  <% end %>
+  <!-- Days of the month (Text Black, Properly Aligned) -->
+  <% (first_day..last_day).each do |date| %>
     <% activity = user.activities.find_by(date: date) %>
-    <div class="w-10 h-10 flex items-center justify-center rounded-full
-         <% if activity %>bg-orange-300<% else %>text-gray-400<% end %>">
+    <div style="width: 80px; height: 40px; display: flex; align-items: center; justify-content: center;
+                border-radius: 50%; font-size: 1rem; font-weight: bold; <%= activity ? 'background-color: #fdba74;' : 'color: black;' %>">
       <%= date.day %>
     </div>
   <% end %>
