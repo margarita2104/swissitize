@@ -1,4 +1,5 @@
 class AddUserToCardCollections < ActiveRecord::Migration[6.0]
+  # Added for rebuild trigger
   def change
     add_reference :card_collections, :user, foreign_key: true, null: true
 
