@@ -4,21 +4,28 @@
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; color: black; font-weight: bold; font-size: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid lightgray;">
   <span>Mon</span> <span>Tue</span> <span>Wed</span> <span>Thu</span> <span>Fri</span> <span>Sat</span> <span>Sun</span>
 </div>
-<!-- Calendar Grid (Properly Aligned) -->
-<div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; color: black; margin-top: 0.5rem; gap: 2px;">
-  <% first_day = Date.today.beginning_of_month %>
-  <% last_day = Date.today.end_of_month %>
-  <% start_offset = first_day.wday == 0 ? 6 : first_day.wday - 1 %>
-  <!-- Empty placeholders before the 1st day of the month -->
-  <% start_offset.times do %>
-    <div style="width: 70px; height: 41px;"></div>
-  <% end %>
-  <!-- Days of the month (Text Black, Properly Aligned) -->
-  <% (first_day..last_day).each do |date| %>
-    <% activity = user.activities.find_by(date: date) %>
-    <div style="width: 70px; height: 41px; display: flex; align-items: center; justify-content: center;
-                border-radius: 50%; font-size: 1rem; font-weight: bold; <%= activity ? 'background-color: #fdba74;' : 'color: black;' %>">
-      <%= date.day %>
-    </div>
-  <% end %>
-</div>
+<!-- Calendar Grid -->
+<% first_day = Date.today.beginning_of_month %>
+<% last_day = Date.today.end_of_month %>
+<% start_offset = first_day.wday == 0 ? 6 : first_day.wday - 1 %> <!-- Ensure Monday start -->
+<% current_week = Date.today.cweek %>
+<% days = (first_day..last_day).to_a %>
+<% days = ([nil] * start_offset) + days %> <!-- Add empty slots for alignment -->
+<!-- Group days into weeks -->
+<% days.each_slice(7) do |week| %>
+  <% is_current_week = week.compact.any? { |date| date && date.cweek == current_week } %>
+  <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; 
+              padding: 5px 0; <%= is_current_week ? 'background-color: #EAFFFC; border-radius: 30px;' : '' %>">
+    <% week.each do |date| %>
+      <% if date.nil? %>
+        <div style="width: 70px; height: 41px;"></div>
+      <% else %>
+        <% is_today = date == Date.today %>
+        <div style="width: 70px; height: 41px; display: flex; align-items: center; justify-content: center;
+                    font-size: 1rem; font-weight: <%= is_today ? 'bold' : 'normal' %>; color: black;">
+          <%= date.day %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

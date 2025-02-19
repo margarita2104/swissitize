@@ -1,4 +1,5 @@
 class CardCollectionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_card_collection, only: %i[show edit update destroy]
 
   # GET /card_collections or /card_collections.json
@@ -26,7 +27,7 @@ class CardCollectionsController < ApplicationController
 
   # POST /card_collections or /card_collections.json
   def create
-    @card_collection = CardCollection.new(card_collection_params)
+    @card_collection = current_user.card_collections.new(card_collection_params) # Assign user directly
 
     respond_to do |format|
       if @card_collection.save

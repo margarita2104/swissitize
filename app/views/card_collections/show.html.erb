@@ -1,5 +1,4 @@
 <div class="container mx-auto px-10 mt-10 flex flex-col">
-  <p style="color: green"><%= notice %></p>
   <h1 class="text-2xl mb-3">
     <%= @card_collection.name %>
   </h1>
@@ -44,8 +43,8 @@
   <% else %>
     <p>No cards available for this collection.</p>
   <% end %>
-  <div>
-    <%= link_to "Back to practice decks", card_collections_path %>
-    <%= button_to "Delete this practice deck", @card_collection, method: :delete %>
+  <div class="container flex mx-auto mt-10 mb-10">
+    <%= link_to "Back to practice decks", card_collections_path, style:"text-decoration: underline; margin-right:4px;" %>  | 
+    <%= button_to "Delete this practice deck", @card_collection, method: :delete, style:"text-decoration: underline; margin-left:4px;" %>
   </div>
 </div>

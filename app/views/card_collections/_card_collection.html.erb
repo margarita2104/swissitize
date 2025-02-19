@@ -1,8 +1,24 @@
 <div id="<%= dom_id card_collection %>">
-  <p class="font-semibold text-xl mb-5">
+  <!-- Card Collection Name -->
+  <p class="font-semibold text-xl mb-2">
     <%= card_collection.name %>
   </p>
-  <p class="mb-5">
-    <%= card_collection.description %>
+  <!-- Number of Questions -->
+  <p class="text-gray-600 mb-3">
+    <%= pluralize(card_collection.cards.count, "question") %>
   </p>
+  <!-- User Avatar & Username -->
+  <div class="flex items-center gap-3">
+    <% if card_collection.user&.avatar.attached? %>
+      <%= image_tag card_collection.user.avatar, style: "width: 40px; height: 40px; object-fit: cover; border-radius: 50%; margin-right: 10px;" %>
+    <% else %>
+      <!-- Default Avatar Placeholder -->
+      <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+        <%= card_collection.user.username.first.upcase if card_collection.user&.username.present? %>
+      </div>
+    <% end %>
+    <p class="font-semibold text-black">
+      <%= card_collection.user.username if card_collection.user.present? %>
+    </p>
+  </div>
 </div>

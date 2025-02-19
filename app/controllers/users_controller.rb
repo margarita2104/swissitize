@@ -37,14 +37,14 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: 'Profile successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    puts "Received params: #{params.inspect}"
+    puts "Languages param: #{params[:user][:languages].inspect}"
+
+    if @user.update(user_params)
+      puts "Updated user languages: #{@user.languages.inspect}"
+      redirect_to @user, notice: 'Profile was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -71,11 +71,16 @@ class UsersController < ApplicationController
 
   # Allow trusted parameters through
   def user_params
-    params.require(:user).permit(:username, :first_name, :last_name, :canton, :country_of_origin,
-                                 :avatar, :languages).tap do |user_params|
-      if params[:user][:languages].present?
-        user_params[:languages] = params[:user][:languages].split(',').map(&:strip).to_json
-      end
-    end
+    permitted = params.require(:user).permit(
+      :username,
+      :first_name,
+      :last_name,
+      :canton,
+      :country_of_origin,
+      :avatar,
+      languages: []
+    )
+    puts "Permitted params: #{permitted.inspect}"
+    permitted
   end
 end
