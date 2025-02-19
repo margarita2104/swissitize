@@ -13,7 +13,7 @@ RUN apt-get update -qq && \
     nodejs \
     pkg-config \
     sqlite3 \
-    imagemagick && \ 
+    imagemagick && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 ENV RAILS_ENV="production" \
@@ -28,14 +28,15 @@ RUN gem install bundler:2.5.22 && \
     bundle config set --local frozen false && \
     bundle install
 
-# Create required directories
+# Create required directories with proper permissions
 RUN mkdir -p tmp/pids tmp/cache public/assets db/migrate storage && \
-    chmod -R 777 tmp public/assets storage
+    chmod -R 777 tmp public/assets storage db
 
-# Now copy the entire application
+# Now copy the entire application ensuring migrations are included
 COPY . .
+RUN chmod -R 777 db/migrate
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+# Precompiling assets
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Set up user and permissions

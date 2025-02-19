@@ -6,21 +6,17 @@ mkdir -p /rails/db /rails/storage /rails/tmp/pids
 
 # Database setup and migrations
 if [ "${1}" = "./bin/rails" ] && [ "${2}" = "s" ]; then
-  # Check if database exists
-  if [ ! -f /rails/db/production.sqlite3 ]; then
-    echo "Database file does not exist. Creating..."
-    touch /rails/db/production.sqlite3
-    chmod 666 /rails/db/production.sqlite3
-  fi
+    # Check if database exists
+    if [ ! -f /rails/db/production.sqlite3 ]; then
+        echo "Database file does not exist. Creating..."
+        bundle exec rails db:create
+    fi
 
-  echo "Running database migrations..."
-  bundle exec rails db:migrate
-
-  # If migrations fail, try preparing the database
-  if [ $? -ne 0 ]; then
-    echo "Migrations failed, trying database preparation..."
-    bundle exec rails db:prepare
-  fi
+    echo "Running database migrations..."
+    bundle exec rails db:migrate 2>/dev/null || {
+        echo "Migrations failed, trying database preparation..."
+        bundle exec rails db:prepare
+    }
 fi
 
 # Execute the main command
