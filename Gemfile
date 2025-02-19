@@ -73,3 +73,5 @@ gem 'thruster', require: false
 gem 'rubyzip', '~> 2.3.0'
 
 gem 'psych', '~> 4.0.6'
+
+gem 'select2-rails'

@@ -40,9 +40,19 @@
         <%= f.text_field :country_of_origin, class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
       </div>
       <!-- Languages -->
-      <div>
+      <div data-controller="languages">
         <%= f.label :languages, class: "block text-gray-700 font-medium mb-1" %>
-        <%= f.text_field :languages, placeholder: "Comma-separated (e.g., English, French)", class: "w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" %>
+        <div class="flex gap-2 mb-2">
+          <select class="w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" 
+            data-languages-target="select">
+            <option value="">Select a language</option>
+            <% AVAILABLE_LANGUAGES.each do |lang| %>
+              <option value="<%= lang %>"><%= lang %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class="flex flex-wrap gap-2" data-languages-target="selectedList"></div>
+        <div data-languages-target="input"></div>
       </div>
     </div>
     <!-- Profile Picture Upload -->
@@ -52,14 +62,13 @@
       <% if @user.avatar.attached? %>
         <div class="mt-4 flex items-center space-x-4">
           <p style="margin-right: 40px;">Current avatar:</p>
-          <%= image_tag @user.avatar, class: "w-24 h-24 rounded-full border border-gray-300 shadow-sm", style:"width: 100px; height: 100px" %>
+          <%= image_tag @user.avatar, class: "w-24 h-24 rounded-full border border-gray-300 shadow-sm", style: "width: 100px; height: 100px" %>
         </div>
       <% end %>
     </div>
     <!-- Submit Button -->
     <div style="margin-top: 24px;">
-      <%= f.submit "Update Profile", class:"py-2 px-4 text-white bg-swiss-red rounded-full cursor-pointer"
-   %>
+      <%= f.submit "Update Profile", class: "py-2 px-4 text-white bg-swiss-red rounded-full cursor-pointer" %>
     </div>
   <% end %>
 </div>
