@@ -44,15 +44,32 @@
         <%= f.label :languages, class: "block text-gray-700 font-medium mb-1" %>
         <div class="flex gap-2 mb-2">
           <select class="w-1/2 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300" 
-            data-languages-target="select">
+                  data-languages-target="select">
             <option value="">Select a language</option>
             <% AVAILABLE_LANGUAGES.each do |lang| %>
               <option value="<%= lang %>"><%= lang %></option>
             <% end %>
           </select>
         </div>
-        <div class="flex flex-wrap gap-2" data-languages-target="selectedList"></div>
-        <div data-languages-target="input"></div>
+
+        <div class="flex flex-wrap gap-2" data-languages-target="selectedList">
+          <% @user.languages.each do |language| %>
+            <div class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full flex items-center gap-2">
+              <%= language %>
+              <button type="button" 
+                      class="text-blue-500 hover:text-blue-700 remove-language" 
+                      data-language="<%= language %>">
+                ×
+              </button>
+            </div>
+          <% end %>
+        </div>
+
+        <div data-languages-target="input">
+          <% @user.languages.each do |language| %>
+            <%= hidden_field_tag 'user[languages][]', language %>
+          <% end %>
+        </div>
       </div>
     </div>
     <!-- Profile Picture Upload -->

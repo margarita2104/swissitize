@@ -8,10 +8,18 @@ function initLanguages() {
   
   if (!languageSelect || !selectedListDiv || !hiddenInput) return;
 
+  // Initialize languages Set with existing languages
   let languages = new Set();
   try {
-    const currentLanguages = JSON.parse(hiddenInput.value || '[]');
-    currentLanguages.forEach(lang => languages.add(lang));
+    // Get existing languages from the hidden input's parent (where we'll store our hidden fields)
+    const existingInputs = hiddenInput.parentNode.querySelectorAll('input[name="user[languages][]"]');
+    existingInputs.forEach(input => languages.add(input.value));
+    
+    // If no existing inputs but we have a value in hiddenInput, use that
+    if (existingInputs.length === 0 && hiddenInput.value) {
+      const currentLanguages = JSON.parse(hiddenInput.value || '[]');
+      currentLanguages.forEach(lang => languages.add(lang));
+    }
   } catch (e) {
     console.error('Error parsing languages:', e);
   }
@@ -25,11 +33,11 @@ function initLanguages() {
     existingInputs.forEach(input => input.remove());
 
     languagesArray.forEach(language => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'user[languages][]';  // Note the [] syntax
-        input.value = language;
-        hiddenInput.parentNode.appendChild(input);
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'user[languages][]';
+      input.value = language;
+      hiddenInput.parentNode.appendChild(input);
     });
     
     // Update display
@@ -48,7 +56,7 @@ function initLanguages() {
     selectedListDiv.querySelectorAll('.remove-language').forEach(button => {
       button.addEventListener('click', removeLanguage);
     });
-}
+  }
 
   function handleLanguageSelect(event) {
     const language = event.target.value;
@@ -66,5 +74,5 @@ function initLanguages() {
   }
 
   languageSelect.addEventListener('change', handleLanguageSelect);
-  updateDisplay();
+  updateDisplay(); // Initial display of existing languages
 }
