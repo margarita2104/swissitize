@@ -4,7 +4,8 @@
 set -e
 
 echo "Running database migrations..."
-kamal exec rails db:migrate RAILS_ENV=production
+# Use your specific kamal path
+/Users/margaritabakhvalova/.rbenv/shims/kamal exec rails db:migrate RAILS_ENV=production
 
 # Check the exit status
 if [ $? -eq 0 ]; then
