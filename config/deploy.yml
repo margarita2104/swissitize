@@ -26,7 +26,7 @@ env:
     - GMAIL_PASSWORD
 
 volumes:
-  # - "swissitize_db:/rails/db"
+  - "swissitize_db:/rails/db"
   - "swissitize_storage:/rails/storage"
 
 asset_path: /rails/public/assets
