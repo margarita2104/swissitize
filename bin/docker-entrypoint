@@ -11,9 +11,10 @@ if [ "${1}" = "./bin/rails" ] && [ "${2}" = "s" ]; then
         echo "Database file does not exist. Creating..."
         bundle exec rails db:create
     fi
-
+    
     echo "Running database migrations..."
-    bundle exec rails db:migrate 2>/dev/null || {
+    # Remove the 2>/dev/null to see any error output
+    bundle exec rails db:migrate || {
         echo "Migrations failed, trying database preparation..."
         bundle exec rails db:prepare
     }
