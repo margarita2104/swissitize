@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Exit on any error
+set -e
+
+echo "Running database migrations..."
+kamal exec rails db:migrate RAILS_ENV=production
+
+# Check the exit status
+if [ $? -eq 0 ]; then
+    echo "Migrations completed successfully"
+    exit 0
+else
+    echo "Migration failed"
+    exit 1
+fi
