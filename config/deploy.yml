@@ -1,34 +1,36 @@
 service: swissitize
 image: margarita2104/swissitize
+
 servers:
   web:
     - 116.203.85.111
+
 proxy:
   ssl: true
   host: swissitize.apps.rubymonstas.ch
+
 registry:
   server: ghcr.io
   username: margarita2104
   password:
     - KAMAL_REGISTRY_PASSWORD
+
 builder:
   arch: amd64
+
 env:
   secret:
     - RAILS_MASTER_KEY
     - GMAIL_DOMAIN
     - GMAIL_USERNAME
     - GMAIL_PASSWORD
+
 volumes:
   - "swissitize_db:/rails/db"
   - "swissitize_storage:/rails/storage"
+
 asset_path: /rails/public/assets
-# Fixed the on_deploy section syntax
-hooks:
-  deploy:
-    after:
-      - command: rails db:migrate
-        host: web[0]
+
 aliases:
   console: app exec --interactive --reuse "bin/rails console"
   shell: app exec --interactive --reuse "bash"
