@@ -24,9 +24,11 @@ volumes:
   - "swissitize_storage:/rails/storage"
 asset_path: /rails/public/assets
 # Fixed the on_deploy section syntax
-on_deploy:
-  - command: rails db:migrate
-    host: web[0]
+hooks:
+  deploy:
+    after:
+      - command: rails db:migrate
+        host: web[0]
 aliases:
   console: app exec --interactive --reuse "bin/rails console"
   shell: app exec --interactive --reuse "bash"
