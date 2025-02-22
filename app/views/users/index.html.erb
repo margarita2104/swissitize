@@ -1,13 +1,15 @@
 <% content_for :title, "Users" %>
-<div class="container mx-auto px-10 mt-10">
-  <h1 class="text-3xl font-bold mt-4">Users</h1>
-  <div id="users">
+<div class="container mx-auto px-10 mt-10 flex flex-col">
+  <h1 class="text-4xl mb-14">Users</h1>
+  <div id="users" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <% @users.each do |user| %>
-      <%= render user %>
-      <p>
-        <%= link_to "Show this user", user %>
-      </p>
+      <div class="border-2 border-mercury rounded-3xl p-5 mb-6">
+        <%= render user %>
+        <p class="mt-2 text-blue-500">
+          <%= link_to "Show this user", user %>
+        </p>
+      </div>
     <% end %>
   </div>
-  <%= link_to "New user", new_user_path %>
+  <%= link_to "New user", new_user_path, class: "text-blue-500 hover:text-blue-700 mt-6" %>
 </div>
